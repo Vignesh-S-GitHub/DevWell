@@ -1,8 +1,9 @@
-# Icon provenance
+# Pulse assets
 
-`icon.svg` is an authored adaptation of the leaf mark in the supplied DevWell prototype. The 192px and 512px PNGs are exact browser rasterizations of that vector. No stock image, external font or generated illustration is used.
+`icon.svg` is the authored Pulse mark. The PNG installation icons are native browser rasterizations of it.
 
+`art/pulse.webp` is an original generated 3D sculpture, optimized for the web. Its full prompt is in `art/pulse-provenance.json`.
 
-`art/recharge.webp` and `art/breakfast.webp` are original illustrations generated for this redesign using the built-in image generator, then resized and compressed for the web. Full prompts are recorded in `art/provenance.json`. The original generations are retained outside the shipping app.
+`fonts/space-grotesk.ttf` is from Google Fonts under the SIL Open Font License; see `fonts/SPACE-OFL.txt`.
 
-Outfit is self-hosted from the Google Fonts repository under the SIL Open Font License. See `fonts/OFL.txt`. The app makes no third-party font request.
+The retired clay illustrations and Outfit font are removed from the current source.

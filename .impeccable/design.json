@@ -1,120 +1,45 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-27T18:02:43.688531+00:00",
-  "title": "Design System: DevWell \u2014 Daily Rhythm",
+  "generatedAt": "2026-11-27T18:35:18.434299+00:00",
+  "title": "DevWell Pulse",
   "extensions": {
-    "shadows": [
-      {
-        "name": "dialog",
-        "value": "0 20px 90px #00000024",
-        "purpose": "Separate the focused sheet from the app."
-      }
-    ],
     "motion": [
       {
-        "name": "ease",
-        "value": "cubic-bezier(.16,1,.3,1)",
-        "purpose": "Brief route and completion feedback."
+        "name": "homepage",
+        "value": "requestAnimationFrame",
+        "purpose": "Live orbital paths and pointer response; paused offscreen and under reduced motion."
       },
       {
-        "name": "route",
-        "value": "300ms",
-        "purpose": "Visible route change."
-      },
-      {
-        "name": "art-breathe",
-        "value": "9s ease-in-out",
-        "purpose": "Gentle scene movement."
-      },
-      {
-        "name": "breathing",
-        "value": "10s ease-in-out",
-        "purpose": "4-second inhale / 6-second exhale visual cue; breathe comfortably."
+        "name": "sculpture",
+        "value": "14s ease-in-out",
+        "purpose": "Kinetic loop movement."
       }
     ],
     "breakpoints": [
       {
         "name": "mobile",
-        "value": "699px"
+        "value": "599px"
       },
       {
         "name": "tablet",
-        "value": "959px"
+        "value": "799px"
       },
       {
-        "name": "desktop",
-        "value": "1199px"
-      },
-      {
-        "name": "wide",
-        "value": "1400px"
+        "name": "compact-desktop",
+        "value": "1099px"
       }
     ]
   },
-  "components": [
-    {
-      "name": "Primary action",
-      "kind": "button",
-      "refersTo": "button-primary",
-      "description": "Forest action with pill shape.",
-      "html": "<button class=\"ds-primary\">Take a break</button>",
-      "css": ".ds-primary{background:var(--green,#365e4c);color:var(--surface,#fffefa);padding:11px 19px;border:0;border-radius:28px;min-height:46px;font:450 13px Outfit,sans-serif}.ds-primary:hover{filter:brightness(.94)}.ds-primary:focus-visible{outline:3px solid var(--green);outline-offset:4px}"
-    },
-    {
-      "name": "Secondary action",
-      "kind": "button",
-      "description": "Quiet bordered action.",
-      "html": "<button class=\"ds-secondary\">Edit routine</button>",
-      "css": ".ds-secondary{background:var(--surface,#fffefa);color:var(--ink,#25342e);border:1px solid var(--line,#e4e6dd);padding:11px 19px;border-radius:28px;min-height:46px;font:450 13px Outfit,sans-serif}.ds-secondary:hover{background:var(--mint,#e4ecdf)}.ds-secondary:focus-visible{outline:3px solid var(--green);outline-offset:4px}"
-    },
-    {
-      "name": "Field",
-      "kind": "input",
-      "description": "Readable tinted input.",
-      "html": "<label class=\"ds-field\">Meal note<input placeholder=\"What did you eat?\"></label>",
-      "css": ".ds-field{display:grid;gap:7px;font:12px Outfit,sans-serif;color:var(--ink,#25342e)}.ds-field input{min-height:46px;border:1px solid var(--line,#e4e6dd);border-radius:12px;padding:12px 14px;background:var(--bg,#f5f3ed);color:inherit;font:14px Outfit,sans-serif}.ds-field input:focus-visible{outline:3px solid var(--green,#365e4c);outline-offset:4px}"
-    },
-    {
-      "name": "Category capsule",
-      "kind": "chip",
-      "description": "Non-interactive category tag.",
-      "html": "<span class=\"ds-chip\">Hydration</span>",
-      "css": ".ds-chip{padding:5px 10px;border-radius:20px;background:#ffffff65;color:var(--water-ink,#315e76);font:11px Outfit,sans-serif}"
-    },
-    {
-      "name": "Panel",
-      "kind": "card",
-      "refersTo": "panel",
-      "description": "Flat bordered grouping surface.",
-      "html": "<section class=\"ds-panel\"><h3>Your daily rhythm</h3><p>Make a little time for you.</p></section>",
-      "css": ".ds-panel{padding:22px;border:1px solid var(--line,#e4e6dd);border-radius:18px;background:var(--surface,#fffefa);color:var(--ink,#25342e);font:15px Outfit,sans-serif}.ds-panel h3{font-weight:550;font-size:21px;margin:0}.ds-panel p{color:var(--muted,#5f6b60);font-size:14px;margin:10px 0 0}"
-    },
-    {
-      "name": "Selected navigation",
-      "kind": "nav",
-      "description": "Named destination with active mint fill.",
-      "html": "<button class=\"ds-nav\">Today</button>",
-      "css": ".ds-nav{display:flex;align-items:center;min-height:52px;padding:0 17px;border:0;border-radius:13px;background:var(--mint,#e4ecdf);color:var(--green,#365e4c);font:550 15px Outfit,sans-serif}.ds-nav:hover{filter:brightness(.97)}.ds-nav:focus-visible{outline:3px solid var(--green);outline-offset:4px}"
-    }
-  ],
   "narrative": {
-    "northStar": "Daily Rhythm",
-    "overview": "A warm, tactile personal wellness workspace with original clay artwork and useful motion.",
-    "keyCharacteristics": [
-      "Real local data",
-      "Quick logging",
-      "Responsive navigation",
-      "Original generated artwork",
-      "Reduced-motion support"
-    ],
+    "northStar": "DevWell Pulse",
+    "overview": "Original midnight, electric blue and acid-lime wellbeing interface.",
     "dos": [
-      "Preserve existing logs.",
-      "Keep functional copy at least 11px.",
-      "Use motion for a clear purpose."
+      "Use the same theme in every option.",
+      "Preserve existing data."
     ],
     "donts": [
-      "Do not invent health data.",
-      "Do not add product affiliate links."
+      "Do not reuse the retired visual design.",
+      "Do not invent health data."
     ]
   }
 }

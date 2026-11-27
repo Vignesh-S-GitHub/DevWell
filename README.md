@@ -1,22 +1,17 @@
 <div align="center">
   <img src="assets/icon.svg" alt="DevWell leaf mark" width="80">
   <h1>DevWell</h1>
-  <p>Find your daily rhythm.</p>
+  <p>Your day. In motion.</p>
   <p>Everyday wellness for screen-heavy workdays.</p>
 </div>
 
-**DevWell 2 — Daily Rhythm** turns small healthy breaks into a practical daily routine. It works on mobile and desktop, installs to your home screen and keeps your personal logs on your device.
+**DevWell 3 — Pulse** turns small healthy breaks into a practical daily routine. It works on mobile and desktop, installs to your home screen and keeps your personal logs on your device.
 
-## New in Daily Rhythm
+## Original Pulse design
 
-- Original 3D wellness and South Indian breakfast artwork, optimized to lightweight WebP assets.
-- A desktop sidebar and mobile bottom navigation, with a global activity logging sheet.
-- One-tap water and movement logs, smarter upcoming activities, routine filters and recent dates.
-- Meal suggestion chips and pre-filled inspiration cards; you always confirm before saving.
-- Guided timer screens, gentle breathing cues, water motion and completion feedback.
-- Metric switching and 7/14-day views of your actual routine, water, movement and sleep history.
-- A complete dark theme and a persisted animation switch that also respects reduced motion.
-- Versioned shell resources to keep installed-app upgrades consistent with existing stored data.
+An entirely new identity replaces the earlier sage/pastel UI: midnight surfaces, electric blue, lime actions, a new pulse symbol and self-hosted Space Grotesk. Every screen, form, menu and dialog uses this system, including the matching light appearance.
+
+The homepage features an original generated pearlescent loop, live canvas orbits and particles, and pointer-responsive dimensional movement. Four floating controls show real water, movement, meal and sleep data. Animation respects the device and app motion preference, pauses offscreen, and stops when navigating away.
 
 ## What works
 
@@ -79,7 +74,8 @@ The browser test covers logs, escaping user content, reload persistence, edited 
 | `index.html` | Accessible app shell |
 | `styles.css` | Prototype's visual system and responsive layout |
 | `app.js` | Core actions, timers, backups and installation |
-| `views.js` | Daily Rhythm screens and interactions |
+| `views.js` | Pulse screens, forms and dialogs |
+| `pulse.js` | Homepage canvas animation and lifecycle |
 | `model.js` | Data validation and prototype migration |
 | `sw.js` | Versioned offline app cache |
 | `manifest.webmanifest` | Installation metadata |
@@ -90,4 +86,4 @@ When changing shell files, bump the cache version in `sw.js` and the resource qu
 
 ## Artwork and type
 
-Original artwork lives in `assets/art/`, with generation prompts in `provenance.json`. Outfit is self-hosted under the SIL Open Font License in `assets/fonts/OFL.txt`. No external font, image or analytics service is contacted by the app.
+Original Pulse artwork lives in `assets/art/pulse.webp`, with its prompt in `pulse-provenance.json`. Space Grotesk is self-hosted under the SIL Open Font License in `assets/fonts/SPACE-OFL.txt`. No external font, image or analytics service is contacted by the app.

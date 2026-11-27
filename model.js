@@ -35,7 +35,7 @@
   function normalize(value) {
     const input = value && typeof value === 'object' && !Array.isArray(value) ? value : {};
     const g = input.settings && typeof input.settings==='object' ? input.settings : {};
-    const out = {schemaVersion:2, days:{}, settings:{water:number(g.water,100,10000,2000),move:number(g.move,1,300,30),sleep:number(g.sleep,1,24,8),dark:g.dark===true,notifications:g.notifications===true,motion:g.motion!==false,routine:defaults.map(r=>[...r])}, timer:null};
+    const out = {schemaVersion:2, days:{}, settings:{water:number(g.water,100,10000,2000),move:number(g.move,1,300,30),sleep:number(g.sleep,1,24,8),dark:g.dark!==false,visualVersion:g.visualVersion===3?3:0,notifications:g.notifications===true,motion:g.motion!==false,routine:defaults.map(r=>[...r])}, timer:null};
     if (Array.isArray(g.routine) && g.routine.length===13) out.settings.routine = defaults.map((r,i)=> {
       const v=g.routine[i];
       if(!Array.isArray(v)) return [...r];

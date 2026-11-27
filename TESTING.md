@@ -1,16 +1,12 @@
-# Daily Rhythm validation
+# Pulse validation
 
-Validated locally on 27 November 2026 for the DevWell 2 redesign.
+The original Pulse interface replaces the previous visual system completely. Its five screens, light appearance and preferences dialog were captured and inspected at mobile and desktop sizes.
 
-- JavaScript syntax checks pass for the core, redesigned views, data model and service worker.
-- Six data-model tests cover safe defaults, real dates, existing prototype logs, backup validation, timer state and imported values.
-- The browser integration suite covers water, meals and escaped user input; persistence; routine windows and a one-hour lunch; goals, mood, sleep and movement; timer resume, one-time completion and its captured date; history; backup/restore; calendar export; dark mode; animation preference persistence; routine filters; quick water logging; offline reload/logging; and unavailable-storage recovery.
-- All five screens fit 320, 390, 768 and 1440 pixel widths without horizontal document overflow.
-- The installed-app regression stages an older service worker and existing logs, then installs the new application at a GitHub-style project subpath. Logs, goals and theme survive. The complete new shell and stored entries remain available offline after the new worker activates.
-- Desktop and mobile home screens, the four other mobile screens, dark mode, the logging sheet and the timer were captured and visually inspected. Generated imagery was decoded before the final capture.
-- A mechanical scan identified undersized helper text and differences from the previous design documentation. Functional type was raised to at least 11px and the design tokens were rewritten for the approved whole-app redesign. Chart layout animation was removed.
-- Original WebP artwork and the self-hosted Outfit font are included in the offline app shell.
+- Six data-model tests cover safe defaults, dates, existing logs, imported backups and timer state.
+- Browser integration covers all health logs, escaping user input, persistence, routine editing, the one-hour lunch, timers, history, backup/restore, calendar export, theme, motion preference, filters and unavailable storage.
+- The homepage canvas is tested by comparing actual successive rendered frames, rather than simply checking for an animation class.
+- Every screen is checked for horizontal overflow at 320, 390, 768 and 1440 pixels. A narrow-screen movement-meter issue was corrected.
+- The installed-cache upgrade regression verifies that earlier logs, goals and theme data remain available in the complete new offline application at a project subpath.
+- Animation is bounded to the homepage. Resize/intersection observers, route cleanup and hidden-document handling stop unnecessary frame work. Reduced motion uses a static canvas.
 
-## Practical limits
-
-OS installation prompts and notification delivery depend on device/browser permission and were not validated on a physical phone. Open-app reminders may be delayed when backgrounded. Calendar export is tested as a file; no external calendar is changed. The application stores data on the current device and does not offer cloud or wearable sync.
+OS installation prompts and notification delivery still depend on the user's device/browser permissions. Reminders require the open app; the calendar export is the separate option for scheduled reminders. Data remains local, without cloud or wearable sync.

@@ -24,13 +24,14 @@ jobs:
         run: |
           node --check app.js
           node --check views.js
+          node --check pulse.js
           node --check model.js
           node --check sw.js
           npm test
       - name: Package app files
         run: |
           mkdir site
-          cp index.html styles.css model.js app.js views.js sw.js manifest.webmanifest site/
+          cp index.html styles.css model.js app.js views.js pulse.js sw.js manifest.webmanifest site/
           cp -R assets site/assets
           touch site/.nojekyll
       - name: Upload app
