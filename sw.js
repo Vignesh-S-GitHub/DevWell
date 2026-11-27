@@ -1,7 +1,7 @@
-const CACHE = 'devwell-shell-v1.0.0';
+const CACHE = 'devwell-shell-v2.0.0';
 const ROOT = new URL('./', self.location).pathname;
-const FILES = ['./','./index.html','./styles.css','./model.js','./app.js','./manifest.webmanifest','./assets/icon.svg','./assets/icon-192.png','./assets/icon-512.png'];
-self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES))));
+const FILES = ['./','./index.html','./styles.css?v=2.0.0','./model.js?v=2.0.0','./app.js?v=2.0.0','./views.js?v=2.0.0','./manifest.webmanifest','./assets/icon.svg','./assets/icon-192.png','./assets/icon-512.png','./assets/art/recharge.webp','./assets/art/breakfast.webp','./assets/fonts/outfit-variable.ttf'];
+self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES).then(()=>self.skipWaiting()))));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('devwell-shell-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',event=>{
   const url=new URL(event.request.url);

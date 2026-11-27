@@ -1,596 +1,120 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-27T17:29:01.290760+00:00",
-  "title": "Design System: DevWell",
+  "generatedAt": "2026-11-27T18:02:43.688531+00:00",
+  "title": "Design System: DevWell \u2014 Daily Rhythm",
   "extensions": {
-    "colorMeta": {
-      "bg": {
-        "role": "neutral",
-        "displayName": "Bg",
-        "tonalRamp": [
-          "oklch(15% 0.00930 113.16)",
-          "oklch(27% 0.00930 113.16)",
-          "oklch(38% 0.00930 113.16)",
-          "oklch(50% 0.00930 113.16)",
-          "oklch(61% 0.00930 113.16)",
-          "oklch(73% 0.00930 113.16)",
-          "oklch(84% 0.00930 113.16)",
-          "oklch(95% 0.00930 113.16)"
-        ]
-      },
-      "surface": {
-        "role": "neutral",
-        "displayName": "Surface",
-        "tonalRamp": [
-          "oklch(15% 0.00000 89.88)",
-          "oklch(27% 0.00000 89.88)",
-          "oklch(38% 0.00000 89.88)",
-          "oklch(50% 0.00000 89.88)",
-          "oklch(61% 0.00000 89.88)",
-          "oklch(73% 0.00000 89.88)",
-          "oklch(84% 0.00000 89.88)",
-          "oklch(95% 0.00000 89.88)"
-        ]
-      },
-      "ink": {
-        "role": "neutral",
-        "displayName": "Ink",
-        "tonalRamp": [
-          "oklch(15% 0.03050 174.43)",
-          "oklch(27% 0.03050 174.43)",
-          "oklch(38% 0.03050 174.43)",
-          "oklch(50% 0.03050 174.43)",
-          "oklch(61% 0.03050 174.43)",
-          "oklch(73% 0.03050 174.43)",
-          "oklch(84% 0.03050 174.43)",
-          "oklch(95% 0.03050 174.43)"
-        ]
-      },
-      "muted": {
-        "role": "neutral",
-        "displayName": "Muted",
-        "tonalRamp": [
-          "oklch(15% 0.02483 157.99)",
-          "oklch(27% 0.02483 157.99)",
-          "oklch(38% 0.02483 157.99)",
-          "oklch(50% 0.02483 157.99)",
-          "oklch(61% 0.02483 157.99)",
-          "oklch(73% 0.02483 157.99)",
-          "oklch(84% 0.02483 157.99)",
-          "oklch(95% 0.02483 157.99)"
-        ]
-      },
-      "line": {
-        "role": "neutral",
-        "displayName": "Line",
-        "tonalRamp": [
-          "oklch(15% 0.01604 130.43)",
-          "oklch(27% 0.01604 130.43)",
-          "oklch(38% 0.01604 130.43)",
-          "oklch(50% 0.01604 130.43)",
-          "oklch(61% 0.01604 130.43)",
-          "oklch(73% 0.01604 130.43)",
-          "oklch(84% 0.01604 130.43)",
-          "oklch(95% 0.01604 130.43)"
-        ]
-      },
-      "green": {
-        "role": "primary",
-        "displayName": "Green",
-        "tonalRamp": [
-          "oklch(15% 0.06689 166.16)",
-          "oklch(27% 0.06689 166.16)",
-          "oklch(38% 0.06689 166.16)",
-          "oklch(50% 0.06689 166.16)",
-          "oklch(61% 0.06689 166.16)",
-          "oklch(73% 0.06689 166.16)",
-          "oklch(84% 0.06689 166.16)",
-          "oklch(95% 0.06689 166.16)"
-        ]
-      },
-      "lime": {
-        "role": "secondary",
-        "displayName": "Lime",
-        "tonalRamp": [
-          "oklch(15% 0.10136 123.15)",
-          "oklch(27% 0.10136 123.15)",
-          "oklch(38% 0.10136 123.15)",
-          "oklch(50% 0.10136 123.15)",
-          "oklch(61% 0.10136 123.15)",
-          "oklch(73% 0.10136 123.15)",
-          "oklch(84% 0.10136 123.15)",
-          "oklch(95% 0.10136 123.15)"
-        ]
-      },
-      "blue": {
-        "role": "secondary",
-        "displayName": "Blue",
-        "tonalRamp": [
-          "oklch(15% 0.02311 246.04)",
-          "oklch(27% 0.02311 246.04)",
-          "oklch(38% 0.02311 246.04)",
-          "oklch(50% 0.02311 246.04)",
-          "oklch(61% 0.02311 246.04)",
-          "oklch(73% 0.02311 246.04)",
-          "oklch(84% 0.02311 246.04)",
-          "oklch(95% 0.02311 246.04)"
-        ]
-      },
-      "peach": {
-        "role": "secondary",
-        "displayName": "Peach",
-        "tonalRamp": [
-          "oklch(15% 0.03404 61.70)",
-          "oklch(27% 0.03404 61.70)",
-          "oklch(38% 0.03404 61.70)",
-          "oklch(50% 0.03404 61.70)",
-          "oklch(61% 0.03404 61.70)",
-          "oklch(73% 0.03404 61.70)",
-          "oklch(84% 0.03404 61.70)",
-          "oklch(95% 0.03404 61.70)"
-        ]
-      },
-      "lav": {
-        "role": "secondary",
-        "displayName": "Lav",
-        "tonalRamp": [
-          "oklch(15% 0.02643 302.58)",
-          "oklch(27% 0.02643 302.58)",
-          "oklch(38% 0.02643 302.58)",
-          "oklch(50% 0.02643 302.58)",
-          "oklch(61% 0.02643 302.58)",
-          "oklch(73% 0.02643 302.58)",
-          "oklch(84% 0.02643 302.58)",
-          "oklch(95% 0.02643 302.58)"
-        ]
-      },
-      "hero": {
-        "role": "primary",
-        "displayName": "Hero",
-        "tonalRamp": [
-          "oklch(15% 0.05972 165.20)",
-          "oklch(27% 0.05972 165.20)",
-          "oklch(38% 0.05972 165.20)",
-          "oklch(50% 0.05972 165.20)",
-          "oklch(61% 0.05972 165.20)",
-          "oklch(73% 0.05972 165.20)",
-          "oklch(84% 0.05972 165.20)",
-          "oklch(95% 0.05972 165.20)"
-        ]
-      },
-      "hero-ink": {
-        "role": "neutral",
-        "displayName": "Hero Ink",
-        "tonalRamp": [
-          "oklch(15% 0.02098 127.37)",
-          "oklch(27% 0.02098 127.37)",
-          "oklch(38% 0.02098 127.37)",
-          "oklch(50% 0.02098 127.37)",
-          "oklch(61% 0.02098 127.37)",
-          "oklch(73% 0.02098 127.37)",
-          "oklch(84% 0.02098 127.37)",
-          "oklch(95% 0.02098 127.37)"
-        ]
-      },
-      "hero-muted": {
-        "role": "neutral",
-        "displayName": "Hero Muted",
-        "tonalRamp": [
-          "oklch(15% 0.02849 143.69)",
-          "oklch(27% 0.02849 143.69)",
-          "oklch(38% 0.02849 143.69)",
-          "oklch(50% 0.02849 143.69)",
-          "oklch(61% 0.02849 143.69)",
-          "oklch(73% 0.02849 143.69)",
-          "oklch(84% 0.02849 143.69)",
-          "oklch(95% 0.02849 143.69)"
-        ]
-      },
-      "metric-ink": {
-        "role": "neutral",
-        "displayName": "Metric Ink",
-        "tonalRamp": [
-          "oklch(15% 0.03566 171.73)",
-          "oklch(27% 0.03566 171.73)",
-          "oklch(38% 0.03566 171.73)",
-          "oklch(50% 0.03566 171.73)",
-          "oklch(61% 0.03566 171.73)",
-          "oklch(73% 0.03566 171.73)",
-          "oklch(84% 0.03566 171.73)",
-          "oklch(95% 0.03566 171.73)"
-        ]
-      },
-      "metric-muted": {
-        "role": "neutral",
-        "displayName": "Metric Muted",
-        "tonalRamp": [
-          "oklch(15% 0.03351 167.28)",
-          "oklch(27% 0.03351 167.28)",
-          "oklch(38% 0.03351 167.28)",
-          "oklch(50% 0.03351 167.28)",
-          "oklch(61% 0.03351 167.28)",
-          "oklch(73% 0.03351 167.28)",
-          "oklch(84% 0.03351 167.28)",
-          "oklch(95% 0.03351 167.28)"
-        ]
-      },
-      "progress": {
-        "role": "primary",
-        "displayName": "Progress",
-        "tonalRamp": [
-          "oklch(15% 0.07794 160.54)",
-          "oklch(27% 0.07794 160.54)",
-          "oklch(38% 0.07794 160.54)",
-          "oklch(50% 0.07794 160.54)",
-          "oklch(61% 0.07794 160.54)",
-          "oklch(73% 0.07794 160.54)",
-          "oklch(84% 0.07794 160.54)",
-          "oklch(95% 0.07794 160.54)"
-        ]
-      },
-      "selected": {
-        "role": "secondary",
-        "displayName": "Selected",
-        "tonalRamp": [
-          "oklch(15% 0.04129 132.96)",
-          "oklch(27% 0.04129 132.96)",
-          "oklch(38% 0.04129 132.96)",
-          "oklch(50% 0.04129 132.96)",
-          "oklch(61% 0.04129 132.96)",
-          "oklch(73% 0.04129 132.96)",
-          "oklch(84% 0.04129 132.96)",
-          "oklch(95% 0.04129 132.96)"
-        ]
-      },
-      "pill": {
-        "role": "secondary",
-        "displayName": "Pill",
-        "tonalRamp": [
-          "oklch(15% 0.02936 125.96)",
-          "oklch(27% 0.02936 125.96)",
-          "oklch(38% 0.02936 125.96)",
-          "oklch(50% 0.02936 125.96)",
-          "oklch(61% 0.02936 125.96)",
-          "oklch(73% 0.02936 125.96)",
-          "oklch(84% 0.02936 125.96)",
-          "oklch(95% 0.02936 125.96)"
-        ]
-      },
-      "icon-sage": {
-        "role": "secondary",
-        "displayName": "Icon Sage",
-        "tonalRamp": [
-          "oklch(15% 0.02973 127.88)",
-          "oklch(27% 0.02973 127.88)",
-          "oklch(38% 0.02973 127.88)",
-          "oklch(50% 0.02973 127.88)",
-          "oklch(61% 0.02973 127.88)",
-          "oklch(73% 0.02973 127.88)",
-          "oklch(84% 0.02973 127.88)",
-          "oklch(95% 0.02973 127.88)"
-        ]
-      },
-      "focus": {
-        "role": "neutral",
-        "displayName": "Focus",
-        "tonalRamp": [
-          "oklch(15% 0.12976 128.62)",
-          "oklch(27% 0.12976 128.62)",
-          "oklch(38% 0.12976 128.62)",
-          "oklch(50% 0.12976 128.62)",
-          "oklch(61% 0.12976 128.62)",
-          "oklch(73% 0.12976 128.62)",
-          "oklch(84% 0.12976 128.62)",
-          "oklch(95% 0.12976 128.62)"
-        ]
-      },
-      "danger": {
-        "role": "neutral",
-        "displayName": "Danger",
-        "tonalRamp": [
-          "oklch(15% 0.15282 29.26)",
-          "oklch(27% 0.15282 29.26)",
-          "oklch(38% 0.15282 29.26)",
-          "oklch(50% 0.15282 29.26)",
-          "oklch(61% 0.15282 29.26)",
-          "oklch(73% 0.15282 29.26)",
-          "oklch(84% 0.15282 29.26)",
-          "oklch(95% 0.15282 29.26)"
-        ]
-      },
-      "dark-bg": {
-        "role": "neutral",
-        "displayName": "Dark Bg",
-        "tonalRamp": [
-          "oklch(15% 0.02168 170.12)",
-          "oklch(27% 0.02168 170.12)",
-          "oklch(38% 0.02168 170.12)",
-          "oklch(50% 0.02168 170.12)",
-          "oklch(61% 0.02168 170.12)",
-          "oklch(73% 0.02168 170.12)",
-          "oklch(84% 0.02168 170.12)",
-          "oklch(95% 0.02168 170.12)"
-        ]
-      },
-      "dark-surface": {
-        "role": "neutral",
-        "displayName": "Dark Surface",
-        "tonalRamp": [
-          "oklch(15% 0.03065 164.63)",
-          "oklch(27% 0.03065 164.63)",
-          "oklch(38% 0.03065 164.63)",
-          "oklch(50% 0.03065 164.63)",
-          "oklch(61% 0.03065 164.63)",
-          "oklch(73% 0.03065 164.63)",
-          "oklch(84% 0.03065 164.63)",
-          "oklch(95% 0.03065 164.63)"
-        ]
-      },
-      "dark-ink": {
-        "role": "neutral",
-        "displayName": "Dark Ink",
-        "tonalRamp": [
-          "oklch(15% 0.01794 123.97)",
-          "oklch(27% 0.01794 123.97)",
-          "oklch(38% 0.01794 123.97)",
-          "oklch(50% 0.01794 123.97)",
-          "oklch(61% 0.01794 123.97)",
-          "oklch(73% 0.01794 123.97)",
-          "oklch(84% 0.01794 123.97)",
-          "oklch(95% 0.01794 123.97)"
-        ]
-      },
-      "dark-muted": {
-        "role": "neutral",
-        "displayName": "Dark Muted",
-        "tonalRamp": [
-          "oklch(15% 0.02242 154.03)",
-          "oklch(27% 0.02242 154.03)",
-          "oklch(38% 0.02242 154.03)",
-          "oklch(50% 0.02242 154.03)",
-          "oklch(61% 0.02242 154.03)",
-          "oklch(73% 0.02242 154.03)",
-          "oklch(84% 0.02242 154.03)",
-          "oklch(95% 0.02242 154.03)"
-        ]
-      },
-      "dark-line": {
-        "role": "neutral",
-        "displayName": "Dark Line",
-        "tonalRamp": [
-          "oklch(15% 0.03129 164.00)",
-          "oklch(27% 0.03129 164.00)",
-          "oklch(38% 0.03129 164.00)",
-          "oklch(50% 0.03129 164.00)",
-          "oklch(61% 0.03129 164.00)",
-          "oklch(73% 0.03129 164.00)",
-          "oklch(84% 0.03129 164.00)",
-          "oklch(95% 0.03129 164.00)"
-        ]
-      },
-      "dark-green": {
-        "role": "primary",
-        "displayName": "Dark Green",
-        "tonalRamp": [
-          "oklch(15% 0.08432 151.33)",
-          "oklch(27% 0.08432 151.33)",
-          "oklch(38% 0.08432 151.33)",
-          "oklch(50% 0.08432 151.33)",
-          "oklch(61% 0.08432 151.33)",
-          "oklch(73% 0.08432 151.33)",
-          "oklch(84% 0.08432 151.33)",
-          "oklch(95% 0.08432 151.33)"
-        ]
-      }
-    },
-    "typographyMeta": {
-      "headline": {
-        "displayName": "Headline",
-        "purpose": "Extracted headline role."
-      },
-      "hero-title": {
-        "displayName": "Hero Title",
-        "purpose": "Extracted hero title role."
-      },
-      "title": {
-        "displayName": "Title",
-        "purpose": "Extracted title role."
-      },
-      "subtitle": {
-        "displayName": "Subtitle",
-        "purpose": "Extracted subtitle role."
-      },
-      "body": {
-        "displayName": "Body",
-        "purpose": "Extracted body role."
-      },
-      "support": {
-        "displayName": "Support",
-        "purpose": "Extracted support role."
-      },
-      "label": {
-        "displayName": "Label",
-        "purpose": "Extracted label role."
-      },
-      "metric": {
-        "displayName": "Metric",
-        "purpose": "Extracted metric role."
-      },
-      "timer": {
-        "displayName": "Timer",
-        "purpose": "Extracted timer role."
-      }
-    },
     "shadows": [
       {
-        "name": "desktop-dock",
-        "value": "0 8px 30px #0000000d",
-        "purpose": "Floating desktop navigation."
-      },
-      {
-        "name": "toast",
-        "value": "0 5px 20px #0002",
-        "purpose": "Temporary status message."
+        "name": "dialog",
+        "value": "0 20px 90px #00000024",
+        "purpose": "Separate the focused sheet from the app."
       }
     ],
     "motion": [
       {
         "name": "ease",
         "value": "cubic-bezier(.16,1,.3,1)",
-        "purpose": "Metric hover and completion changes."
+        "purpose": "Brief route and completion feedback."
       },
       {
-        "name": "button-state",
-        "value": "background-color .18s, color .18s",
-        "purpose": "Global button states."
+        "name": "route",
+        "value": "300ms",
+        "purpose": "Visible route change."
       },
       {
-        "name": "metric-hover",
-        "value": "transform .3s var(--ease)",
-        "purpose": "Lift the metric 2px on hover."
+        "name": "art-breathe",
+        "value": "9s ease-in-out",
+        "purpose": "Gentle scene movement."
       },
       {
-        "name": "completion-color",
-        "value": "background-color .25s var(--ease), color .25s var(--ease)",
-        "purpose": "Completion states."
-      },
-      {
-        "name": "check-in",
-        "value": ".35s var(--ease)",
-        "purpose": "Scale the check from .5 to 1."
-      },
-      {
-        "name": "reduced-motion",
-        "value": "animation:none!important; transition:none!important; scroll-behavior:auto!important",
-        "purpose": "Global reduced-motion override, including pseudo-elements."
+        "name": "breathing",
+        "value": "10s ease-in-out",
+        "purpose": "4-second inhale / 6-second exhale visual cue; breathe comfortably."
       }
     ],
     "breakpoints": [
       {
-        "name": "narrow",
-        "value": "max-width:360px"
+        "name": "mobile",
+        "value": "699px"
       },
       {
-        "name": "shell-border",
-        "value": "min-width:600px"
+        "name": "tablet",
+        "value": "959px"
       },
       {
         "name": "desktop",
-        "value": "min-width:800px"
+        "value": "1199px"
+      },
+      {
+        "name": "wide",
+        "value": "1400px"
       }
     ]
   },
   "components": [
     {
-      "name": "Primary button",
+      "name": "Primary action",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Full-width log or save action.",
-      "html": "<button class=\"ds-primary\">Save preferences</button>",
-      "css": ".ds-primary{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;font-size:15px;line-height:1.45;border:0;cursor:pointer;min-height:44px;transition:background-color .18s,color .18s;background:#245a46;color:#fff;border-radius:14px;padding:12px 16px;font-weight:700;width:100%;min-height:48px}.ds-primary:hover{filter:brightness(.97)}.ds-primary:active{transform:scale(.98)}.ds-primary:focus-visible{outline:3px solid #769d40;outline-offset:3px;}.ds-primary:disabled{opacity:.55;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none!important;animation:none!important}}"
+      "description": "Forest action with pill shape.",
+      "html": "<button class=\"ds-primary\">Take a break</button>",
+      "css": ".ds-primary{background:var(--green,#365e4c);color:var(--surface,#fffefa);padding:11px 19px;border:0;border-radius:28px;min-height:46px;font:450 13px Outfit,sans-serif}.ds-primary:hover{filter:brightness(.94)}.ds-primary:focus-visible{outline:3px solid var(--green);outline-offset:4px}"
     },
     {
-      "name": "Secondary button",
+      "name": "Secondary action",
       "kind": "button",
-      "refersTo": "button-secondary",
-      "description": "Bordered supporting action.",
-      "html": "<button class=\"ds-secondary\">Download backup</button>",
-      "css": ".ds-secondary{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;font-size:15px;line-height:1.45;border:0;cursor:pointer;min-height:44px;transition:background-color .18s,color .18s;background:none;color:var(--ink,#152b25);border:1px solid var(--line,#e0e6db);border-radius:13px;padding:10px 15px;font-weight:700;min-height:48px}.ds-secondary:hover{filter:brightness(.97)}.ds-secondary:active{transform:scale(.98)}.ds-secondary:focus-visible{outline:3px solid #769d40;outline-offset:3px;}.ds-secondary:disabled{opacity:.55;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-secondary{transition:none!important;animation:none!important}}"
+      "description": "Quiet bordered action.",
+      "html": "<button class=\"ds-secondary\">Edit routine</button>",
+      "css": ".ds-secondary{background:var(--surface,#fffefa);color:var(--ink,#25342e);border:1px solid var(--line,#e4e6dd);padding:11px 19px;border-radius:28px;min-height:46px;font:450 13px Outfit,sans-serif}.ds-secondary:hover{background:var(--mint,#e4ecdf)}.ds-secondary:focus-visible{outline:3px solid var(--green);outline-offset:4px}"
     },
     {
-      "name": "Text action",
-      "kind": "button",
-      "refersTo": "button-link",
-      "description": "Compact section action.",
-      "html": "<button class=\"ds-link\">See all \u2192</button>",
-      "css": ".ds-link{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;font-size:15px;line-height:1.45;border:0;cursor:pointer;min-height:44px;transition:background-color .18s,color .18s;background:none;color:var(--green,#245a46);font-weight:750;padding:0 4px;font-size:13px}.ds-link:hover{filter:brightness(.97)}.ds-link:active{transform:scale(.98)}.ds-link:focus-visible{outline:3px solid #769d40;outline-offset:3px;}.ds-link:disabled{opacity:.55;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-link{transition:none!important;animation:none!important}}"
-    },
-    {
-      "name": "Labeled field",
+      "name": "Field",
       "kind": "input",
-      "refersTo": "field",
-      "description": "Editable personal goal.",
-      "html": "<label class=\"ds-field\">Hours slept last night<input class=\"ds-input\" type=\"number\" min=\"0\" max=\"24\" step=\"0.5\" placeholder=\"7.5\"></label>",
-      "css": ".ds-field{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;font-size:15px;line-height:1.45;display:grid;gap:6px;font-size:13px;font-weight:700;margin:12px 0;color:var(--ink,#152b25)}.ds-input{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;font-size:15px;line-height:1.45;width:100%;padding:12px;border:1px solid var(--line,#e0e6db);border-radius:12px;background:var(--bg,#f5f6ef);color:var(--ink,#152b25);min-height:48px;caret-color:var(--green,#245a46)}.ds-input::placeholder{color:var(--muted,#5c6c62);opacity:1}.ds-input:focus-visible{outline:3px solid #769d40;outline-offset:3px;}"
+      "description": "Readable tinted input.",
+      "html": "<label class=\"ds-field\">Meal note<input placeholder=\"What did you eat?\"></label>",
+      "css": ".ds-field{display:grid;gap:7px;font:12px Outfit,sans-serif;color:var(--ink,#25342e)}.ds-field input{min-height:46px;border:1px solid var(--line,#e4e6dd);border-radius:12px;padding:12px 14px;background:var(--bg,#f5f3ed);color:inherit;font:14px Outfit,sans-serif}.ds-field input:focus-visible{outline:3px solid var(--green,#365e4c);outline-offset:4px}"
     },
     {
-      "name": "Five-tab navigation",
-      "kind": "nav",
-      "refersTo": "nav-active",
-      "description": "Same five destinations; preview stays in normal flow.",
-      "html": "<nav class=\"ds-nav\" aria-label=\"Main navigation\"><button class=\"ds-tab\" aria-current=\"page\"><span class=\"ds-navicon\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m3 10 9-7 9 7v10H3z\"/><path d=\"M9 20v-6h6v6\"/></svg></span>Today</button><button class=\"ds-tab\"><span class=\"ds-navicon\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"3\" y=\"5\" width=\"18\" height=\"16\" rx=\"3\"/><path d=\"M7 3v4m10-4v4M3 10h18\"/></svg></span>Routine</button><button class=\"ds-tab\"><span class=\"ds-navicon\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 3v7a3 3 0 0 0 6 0V3M7 3v18M19 3c-3 3-4 7-4 10h4m0-10v18\"/></svg></span>Food</button><button class=\"ds-tab\"><span class=\"ds-navicon\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"15\" cy=\"4\" r=\"2\"/><path d=\"m7 21 4-7 3 3 1 4M4 13l4-4 4 1 3 4 4-1M12 10l-1 4\"/></svg></span>Move</button><button class=\"ds-tab\"><span class=\"ds-navicon\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 20V4m0 16h17M9 16v-5m5 5V7m5 9V4\"/></svg></span>Insights</button></nav>",
-      "css": ".ds-nav{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;font-size:15px;line-height:1.45;display:grid;grid-template-columns:repeat(5,1fr);gap:2px;padding:9px 8px 10px;background:var(--surface,#fff);border-top:1px solid var(--line,#e0e6db)}.ds-tab{border:0;cursor:pointer;min-height:44px;transition:background-color .18s,color .18s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:11px;font-weight:650;color:var(--muted,#5c6c62);background:none;min-height:54px}.ds-tab[aria-current=page]{color:var(--green,#245a46);font-weight:800}.ds-navicon{display:grid;place-items:center;width:42px;height:30px;border-radius:12px}.ds-tab[aria-current=page] .ds-navicon{background:#dff0d4;color:#245a46}.ds-nav svg{width:22px;height:22px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round;}.ds-tab:hover{filter:brightness(.97)}.ds-tab:active{transform:scale(.98)}.ds-tab:focus-visible{outline:3px solid #769d40;outline-offset:3px;}.ds-tab:disabled{opacity:.55;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-tab{transition:none!important;animation:none!important}}"
-    },
-    {
-      "name": "Informational pill",
+      "name": "Category capsule",
       "kind": "chip",
-      "refersTo": "pill",
-      "description": "Noninteractive schedule context.",
-      "html": "<span class=\"ds-pill\">Weekday plan</span>",
-      "css": ".ds-pill{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;font-size:15px;line-height:1.45;display:inline-block;background:#e9f2dd;color:#245a46;border-radius:20px;padding:5px 10px;font-size:11px;font-weight:750}"
+      "description": "Non-interactive category tag.",
+      "html": "<span class=\"ds-chip\">Hydration</span>",
+      "css": ".ds-chip{padding:5px 10px;border-radius:20px;background:#ffffff65;color:var(--water-ink,#315e76);font:11px Outfit,sans-serif}"
     },
     {
-      "name": "Content panel",
+      "name": "Panel",
       "kind": "card",
       "refersTo": "panel",
-      "description": "Flat bordered content group.",
-      "html": "<section class=\"ds-panel\"><h2>Sleep & recovery</h2><p>Last night\u2019s sleep \u00b7 goal 8 hrs</p></section>",
-      "css": ".ds-panel{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;font-size:15px;line-height:1.45;background:var(--surface,#fff);color:var(--ink,#152b25);border:1px solid var(--line,#e0e6db);border-radius:23px;padding:17px;margin-bottom:12px;box-shadow:none}.ds-panel h2{margin:0;font-size:21px;letter-spacing:-.025em}.ds-panel p{margin:10px 0 0;color:var(--muted,#5c6c62);font-size:13px}@media(min-width:800px){.ds-panel{padding:21px}}"
+      "description": "Flat bordered grouping surface.",
+      "html": "<section class=\"ds-panel\"><h3>Your daily rhythm</h3><p>Make a little time for you.</p></section>",
+      "css": ".ds-panel{padding:22px;border:1px solid var(--line,#e4e6dd);border-radius:18px;background:var(--surface,#fffefa);color:var(--ink,#25342e);font:15px Outfit,sans-serif}.ds-panel h3{font-weight:550;font-size:21px;margin:0}.ds-panel p{color:var(--muted,#5f6b60);font-size:14px;margin:10px 0 0}"
     },
     {
-      "name": "Hydration metric",
-      "kind": "card",
-      "refersTo": "metric-water",
-      "description": "Whole-card action representing the four health categories.",
-      "html": "<button class=\"ds-metric\"><span class=\"ds-ico\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 3c-3 5-7 9-7 13a7 7 0 0 0 14 0c0-4-4-8-7-13Z\"/><path d=\"M8 16c0 2 1 3 3 3\"/></svg></span><small>Hydration</small><strong>1.0 L</strong><span class=\"ds-mini\">of 2 L goal</span><span class=\"ds-track\" role=\"progressbar\" aria-label=\"Goal progress\" aria-valuenow=\"50\" aria-valuemin=\"0\" aria-valuemax=\"100\"><span></span></span></button>",
-      "css": ".ds-metric{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;font-size:15px;line-height:1.45;border:0;cursor:pointer;min-height:44px;transition:background-color .18s,color .18s;border-radius:21px;padding:15px;min-height:155px;min-width:150px;background:var(--blue,#dfedfa);color:#173129;text-align:left;display:flex;flex-direction:column;align-items:flex-start;transition:transform .3s var(--ease,cubic-bezier(.16,1,.3,1))}.ds-ico{width:36px;height:36px;border-radius:12px;background:#ffffff85;display:grid;place-items:center;margin-bottom:12px}.ds-ico svg{width:22px;height:22px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round;}.ds-metric small{font-size:12px;color:#40584e}.ds-metric strong{font-size:25px;line-height:1.15;letter-spacing:-.03em}.ds-mini{font-size:12px;margin:3px 0 9px}.ds-track{margin-top:auto;width:100%;background:#17312916;height:6px;border-radius:20px;overflow:hidden}.ds-track span{height:100%;display:block;width:50%;border-radius:20px;background:#3b7659}.ds-metric:hover{filter:brightness(.97);transform:translateY(-2px)}.ds-metric:active{transform:scale(.98)}.ds-metric:focus-visible{outline:3px solid #769d40;outline-offset:3px;}@media(prefers-reduced-motion:reduce){.ds-metric{transition:none!important}}"
-    },
-    {
-      "name": "Completed check",
-      "kind": "button",
-      "refersTo": "completion-done",
-      "description": "Pressed circular completion control.",
-      "html": "<button class=\"ds-check\" aria-label=\"Undo walk break\" aria-pressed=\"true\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"m5 12 4 4L19 6\"/></svg></button>",
-      "css": ".ds-check{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;font-size:15px;line-height:1.45;border:0;cursor:pointer;min-height:44px;transition:background-color .18s,color .18s;width:46px;height:46px;border-radius:50%;border:1px solid #245a46;display:grid;place-items:center;background:#245a46;color:#fff;transition:background-color .25s var(--ease,cubic-bezier(.16,1,.3,1)),color .25s var(--ease,cubic-bezier(.16,1,.3,1))}.ds-check svg{width:22px;height:22px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round;animation:ds-check-in .35s var(--ease,cubic-bezier(.16,1,.3,1))}@keyframes ds-check-in{from{transform:scale(.5)}to{transform:scale(1)}}.ds-check:hover{filter:brightness(.97)}.ds-check:active{transform:scale(.98)}.ds-check:focus-visible{outline:3px solid #769d40;outline-offset:3px;}.ds-check:disabled{opacity:.55;cursor:not-allowed}@media(prefers-reduced-motion:reduce){.ds-check{transition:none!important;animation:none!important}}@media(prefers-reduced-motion:reduce){.ds-check svg{animation:none!important}}"
-    },
-    {
-      "name": "Daily completion hero",
-      "kind": "custom",
-      "refersTo": "hero",
-      "description": "Summary with equivalent text and circular progress.",
-      "html": "<section class=\"ds-hero\"><div><h2>Make time<br>for yourself.</h2><p>6 of 13 routines completed</p></div><div class=\"ds-ring\"><div><b>46%</b><small>completed</small></div></div></section>",
-      "css": ".ds-hero{font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;font-size:15px;line-height:1.45;background:#204e3c;color:#f8fff0;border-radius:27px;padding:20px;display:flex;align-items:center;justify-content:space-between;gap:12px;overflow:hidden}.ds-hero h2{font-size:25px;line-height:1.12;letter-spacing:-.025em;margin:9px 0}.ds-hero p{font-size:12px;color:#d6e6d5;max-width:170px;margin:0}.ds-ring{width:112px;height:112px;flex:0 0 112px;border-radius:50%;background:conic-gradient(#dff6aa 46%,#ffffff25 0);display:grid;place-items:center}.ds-ring>div{background:#204e3c;border-radius:50%;width:91px;height:91px;display:grid;place-content:center;text-align:center}.ds-ring b{font-size:30px;line-height:1.1;letter-spacing:-.03em}.ds-ring small{color:#d6e6d5;font-size:10px}@media(max-width:360px){.ds-hero{padding:16px}.ds-ring{width:95px;height:95px;flex-basis:95px}.ds-ring>div{width:78px;height:78px}}@media(min-width:800px){.ds-hero{padding:28px}.ds-hero h2{font-size:30px}.ds-hero p{max-width:300px;font-size:14px}}"
+      "name": "Selected navigation",
+      "kind": "nav",
+      "description": "Named destination with active mint fill.",
+      "html": "<button class=\"ds-nav\">Today</button>",
+      "css": ".ds-nav{display:flex;align-items:center;min-height:52px;padding:0 17px;border:0;border-radius:13px;background:var(--mint,#e4ecdf);color:var(--green,#365e4c);font:550 15px Outfit,sans-serif}.ds-nav:hover{filter:brightness(.97)}.ds-nav:focus-visible{outline:3px solid var(--green);outline-offset:4px}"
     }
   ],
   "narrative": {
-    "northStar": "Everyday health",
-    "overview": "DevWell extends the supplied mobile prototype into a practical personal wellness companion. Its forest and sage identity, pastel health categories, authored leaf mark and five-tab navigation are the visual authority. \u201cEveryday health\u201d is the incumbent app title, used here as a descriptive anchor rather than a newly selected metaphor.\n\nCompact rounded containers, clear numerical progress and familiar system typography make everyday logging approachable. Desktop adds useful space while keeping the mobile language. This records the implemented system, not a separately approved visual redesign or newly inferred user preferences.",
+    "northStar": "Daily Rhythm",
+    "overview": "A warm, tactile personal wellness workspace with original clay artwork and useful motion.",
     "keyCharacteristics": [
-      "Forest identity and pastel health categories.",
-      "Mobile-first navigation with an expanded desktop container.",
-      "Legible system type, keyboard focus and restrained motion.",
-      "Flat panels with limited floating elevation."
-    ],
-    "rules": [
-      {
-        "name": "The Flat Panel Rule",
-        "body": "Keep content panels flat; use the existing border and tonal surface to separate them.",
-        "section": "elevation"
-      }
+      "Real local data",
+      "Quick logging",
+      "Responsive navigation",
+      "Original generated artwork",
+      "Reduced-motion support"
     ],
     "dos": [
-      "**Do** preserve the authored leaf and forest/sage/pastel identity.",
-      "**Do** retain Today, Routine, Food, Move and Insights on every screen width.",
-      "**Do** pair graphical progress and selection with text or semantic state.",
-      "**Do** preserve visible focus, touch targets and reduced-motion support.",
-      "**Do** use the established category colors consistently."
+      "Preserve existing logs.",
+      "Keep functional copy at least 11px.",
+      "Use motion for a clear purpose."
     ],
     "donts": [
-      "**Don't** replace the incumbent identity with an unrelated visual world.",
-      "**Don't** restore the disabled decorative hero rings as a default pattern.",
-      "**Don't** reinstate the removed Daily routine hero kicker as a system requirement.",
-      "**Don't** assume all forest and pastel components recolor with the dark theme.",
-      "**Don't** add cloud or account status patterns without new product scope."
+      "Do not invent health data.",
+      "Do not add product affiliate links."
     ]
   }
 }

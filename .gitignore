@@ -4,3 +4,5 @@ site/
 *.log
 playwright-report/
 test-results/
+
+.review/

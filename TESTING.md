@@ -1,14 +1,16 @@
-# Validation record
+# Daily Rhythm validation
 
-Validated locally on 27 November 2026. Source is uploaded to `Vignesh-S-GitHub/DevWell`. The initial GitHub workflow passed all validation and packaging checks. Deployment stopped at `Set up Pages` because Pages is not enabled for the repository; its source must be set to GitHub Actions.
+Validated locally on 27 November 2026 for the DevWell 2 redesign.
 
-- JavaScript syntax checks passed for `app.js`, `model.js` and `sw.js`.
-- Six Node data-model tests passed: safe defaults, real dates, prototype migration, backup validation, timer persistence and untrusted imported values.
-- The browser integration suite passed: water and meal logs, escaped meal text, persistence, routine completion, edited windows and a one-hour lunch, goals, mood, sleep, movement, persistent timers and single credit on the captured start date, date history, backup and restore, weekday calendar export, dark-mode persistence, offline reload/logging, all five screens at four widths and unavailable storage recovery.
-- Browser runs reported no page errors. All five screens were checked for horizontal overflow at 320, 390, 768 and 1440 pixels.
-- Desktop/mobile captures were inspected against the supplied prototype. A separate design reviewer confirmed the leaf/forest/pastel identity and accepted the two listed corrections as resolved: persisting product context and removing a decorative hero kicker. This verdict covers those corrections rather than claiming a complete visual audit of all states.
-- Mechanical design scan ran once. Colored shadow and width-animation findings were corrected.
+- JavaScript syntax checks pass for the core, redesigned views, data model and service worker.
+- Six data-model tests cover safe defaults, real dates, existing prototype logs, backup validation, timer state and imported values.
+- The browser integration suite covers water, meals and escaped user input; persistence; routine windows and a one-hour lunch; goals, mood, sleep and movement; timer resume, one-time completion and its captured date; history; backup/restore; calendar export; dark mode; animation preference persistence; routine filters; quick water logging; offline reload/logging; and unavailable-storage recovery.
+- All five screens fit 320, 390, 768 and 1440 pixel widths without horizontal document overflow.
+- The installed-app regression stages an older service worker and existing logs, then installs the new application at a GitHub-style project subpath. Logs, goals and theme survive. The complete new shell and stored entries remain available offline after the new worker activates.
+- Desktop and mobile home screens, the four other mobile screens, dark mode, the logging sheet and the timer were captured and visually inspected. Generated imagery was decoded before the final capture.
+- A mechanical scan identified undersized helper text and differences from the previous design documentation. Functional type was raised to at least 11px and the design tokens were rewritten for the approved whole-app redesign. Chart layout animation was removed.
+- Original WebP artwork and the self-hosted Outfit font are included in the offline app shell.
 
-## Limits
+## Practical limits
 
-Notification delivery and OS installation prompts depend on browser/OS permission and were not tested on a physical phone. Reminders require an open app and can be delayed when backgrounded. Calendar file contents were validated, but importing into an external calendar was not performed. GitHub CI validation passed; a live Pages deployment remains blocked on that repository setting.
+OS installation prompts and notification delivery depend on device/browser permission and were not validated on a physical phone. Open-app reminders may be delayed when backgrounded. Calendar export is tested as a file; no external calendar is changed. The application stores data on the current device and does not offer cloud or wearable sync.

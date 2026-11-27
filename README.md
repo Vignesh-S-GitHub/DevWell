@@ -1,11 +1,22 @@
 <div align="center">
   <img src="assets/icon.svg" alt="DevWell leaf mark" width="80">
   <h1>DevWell</h1>
-  <p>Small steps. Better days.</p>
+  <p>Find your daily rhythm.</p>
   <p>Everyday wellness for screen-heavy workdays.</p>
 </div>
 
-DevWell turns small healthy breaks into a practical daily routine. It works on mobile and desktop, installs to your home screen and keeps your personal logs on your device.
+**DevWell 2 — Daily Rhythm** turns small healthy breaks into a practical daily routine. It works on mobile and desktop, installs to your home screen and keeps your personal logs on your device.
+
+## New in Daily Rhythm
+
+- Original 3D wellness and South Indian breakfast artwork, optimized to lightweight WebP assets.
+- A desktop sidebar and mobile bottom navigation, with a global activity logging sheet.
+- One-tap water and movement logs, smarter upcoming activities, routine filters and recent dates.
+- Meal suggestion chips and pre-filled inspiration cards; you always confirm before saving.
+- Guided timer screens, gentle breathing cues, water motion and completion feedback.
+- Metric switching and 7/14-day views of your actual routine, water, movement and sleep history.
+- A complete dark theme and a persisted animation switch that also respects reduced motion.
+- Versioned shell resources to keep installed-app upgrades consistent with existing stored data.
 
 ## What works
 
@@ -13,7 +24,7 @@ DevWell turns small healthy breaks into a practical daily routine. It works on m
 - **Routine:** 13 editable activity windows, a one-hour lunch and weekday calendar export with reminders at each window's start. The original breakfast window starts before work.
 - **Food:** water logging, meal notes and South Indian meal inspiration.
 - **Move:** movement logging and eye, stretch, walk and breathing timers. A running timer survives reload and logs completed movement once.
-- **Insights:** seven-day routine completion, sleep and mood summaries, and a date picker for earlier logs.
+- **Insights:** 7/14-day routine, water, movement and sleep charts, plus mood summaries, and a date picker for earlier logs.
 - **Preferences:** personal goals, dark mode, installation help, optional open-app reminders, JSON backup/restore and a confirmed local-data reset.
 - **Offline:** the app shell is cached after a successful online visit; logging remains available without a connection.
 
@@ -56,6 +67,7 @@ npm install
 npx playwright install chromium
 # Start a local HTTP server in a separate terminal, then:
 npm run test:browser
+npm run test:upgrade
 ```
 
 The browser test covers logs, escaping user content, reload persistence, edited windows, one-hour lunch, goals, mood, sleep, timer resume and single completion, history, backup/restore, calendar export, theme, offline use, all five screens at 320/390/768/1440 pixels, and blocked storage. Use `BASE_URL` for a server hosting DevWell in a subdirectory and `CHROMIUM_EXECUTABLE_PATH` for a preinstalled browser.
@@ -66,11 +78,16 @@ The browser test covers logs, escaping user content, reload persistence, edited 
 | --- | --- |
 | `index.html` | Accessible app shell |
 | `styles.css` | Prototype's visual system and responsive layout |
-| `app.js` | Screens, logs, timers, backups and installation |
+| `app.js` | Core actions, timers, backups and installation |
+| `views.js` | Daily Rhythm screens and interactions |
 | `model.js` | Data validation and prototype migration |
 | `sw.js` | Versioned offline app cache |
 | `manifest.webmanifest` | Installation metadata |
 | `tests/` | Data tests and browser integration test |
 | `.github/workflows/pages.yml` | GitHub Pages deployment |
 
-When changing shell files, bump the cache version in `sw.js` so returning installations receive the update. Old installations show an update notice; closing all DevWell tabs and reopening applies it.
+When changing shell files, bump the cache version in `sw.js` and the resource query versions in `index.html` and `sw.js`. Returning users see a refresh notice; their local logs stay intact. The upgrade regression test checks an installed old cache against the new application at a project subpath.
+
+## Artwork and type
+
+Original artwork lives in `assets/art/`, with generation prompts in `provenance.json`. Outfit is self-hosted under the SIL Open Font License in `assets/fonts/OFL.txt`. No external font, image or analytics service is contacted by the app.
