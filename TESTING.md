@@ -1,6 +1,6 @@
 # Validation record
 
-Validated locally on 27 November 2026. GitHub Pages deployment has not yet been executed; repository creation/Pages setup requires the destination account's browser sign-in or an existing repository.
+Validated locally on 27 November 2026. Source is uploaded to `Vignesh-S-GitHub/DevWell`. The initial GitHub workflow passed all validation and packaging checks. Deployment stopped at `Set up Pages` because Pages is not enabled for the repository; its source must be set to GitHub Actions.
 
 - JavaScript syntax checks passed for `app.js`, `model.js` and `sw.js`.
 - Six Node data-model tests passed: safe defaults, real dates, prototype migration, backup validation, timer persistence and untrusted imported values.
@@ -11,4 +11,4 @@ Validated locally on 27 November 2026. GitHub Pages deployment has not yet been 
 
 ## Limits
 
-Notification delivery and OS installation prompts depend on browser/OS permission and were not tested on a physical phone. Reminders require an open app and can be delayed when backgrounded. Calendar file contents were validated, but importing into an external calendar was not performed. No live GitHub deployment has been claimed.
+Notification delivery and OS installation prompts depend on browser/OS permission and were not tested on a physical phone. Reminders require an open app and can be delayed when backgrounded. Calendar file contents were validated, but importing into an external calendar was not performed. GitHub CI validation passed; a live Pages deployment remains blocked on that repository setting.

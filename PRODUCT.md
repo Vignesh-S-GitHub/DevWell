@@ -20,4 +20,4 @@ Users log water, meals, movement, sleep and mood; complete a flexible weekday ro
 
 ## Assumptions
 
-The first release is a personal device app rather than a multi-user service. No cloud sync, wearable integration, automatic calendar changes or background scheduled push service has been requested. GitHub repository creation and Pages setup remain pending until browser sign-in or an existing destination repository is provided.
+The first release is a personal device app rather than a multi-user service. No cloud sync, wearable integration, automatic calendar changes or background scheduled push service has been requested. The destination is `Vignesh-S-GitHub/DevWell`. Source has been uploaded. GitHub Pages must be enabled with GitHub Actions as its source before the deployment can publish.
