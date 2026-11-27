@@ -12,7 +12,18 @@ const nav=name=>p.getByRole('navigation').getByRole('button',{name,exact:true}).
 const button=name=>p.getByRole('button',{name,exact:true});
 const close=()=>p.getByRole('button',{name:'Close dialog'}).click();
 await nav('Food');await button('Add 250 ml').click();await button('+ 500 ml').click();assert.match(await p.locator('.big').innerText(),/750/);
-await button('+ Log meal').click();await p.getByLabel('What did you eat?').fill('<img src=x onerror=alert(1)> rice & dal');await button('Save meal').click();assert.equal(await p.locator('#main img[src="x"]').count(),0);assert.match(await p.locator('#main').innerText(),/rice & dal/);
+await button('+ Log meal').click();
+assert.equal(await p.locator('dialog select').count(),0,'Meal options must stay inside the themed app');
+assert.equal(await p.getByRole('radio',{name:'Breakfast',exact:true}).getAttribute('aria-checked'),'true');
+await p.getByRole('radio',{name:'Lunch',exact:true}).click();
+await p.keyboard.press('ArrowRight');assert.equal(await p.getByRole('radio',{name:'Snack',exact:true}).getAttribute('aria-checked'),'true');
+await p.keyboard.press('End');assert.equal(await p.getByRole('radio',{name:'Dinner',exact:true}).getAttribute('aria-checked'),'true');
+await p.keyboard.press('Home');assert.equal(await p.getByRole('radio',{name:'Breakfast',exact:true}).getAttribute('aria-checked'),'true');
+await p.keyboard.press('ArrowLeft');assert.equal(await p.getByRole('radio',{name:'Dinner',exact:true}).getAttribute('aria-checked'),'true');
+await p.getByRole('radio',{name:'Lunch',exact:true}).click();
+await p.getByLabel('What did you eat?').fill('<img src=x onerror=alert(1)> rice & dal');await button('Save meal').click();assert.equal(await p.locator('#main img[src="x"]').count(),0);assert.match(await p.locator('#main').innerText(),/rice & dal/);
+assert.equal(await p.evaluate(()=>JSON.parse(localStorage.getItem('devwell-v2')).days[Object.keys(JSON.parse(localStorage.getItem('devwell-v2')).days).sort().at(-1)].meals[0].type),'Lunch');
+await p.locator('.meal-idea').nth(3).click();assert.equal(await p.getByRole('radio',{name:'Dinner',exact:true}).getAttribute('aria-checked'),'true');assert.match(await p.getByLabel('What did you eat?').inputValue(),/Vegetables/);await close();
 await p.reload();await nav('Food');assert.match(await p.locator('.big').innerText(),/750/);assert.match(await p.locator('#main').innerText(),/rice & dal/);
 await nav('Routine');await button('Complete Breakfast').click();assert.equal(await button('Undo Breakfast').getAttribute('aria-pressed'),'true');await button('Edit routine times').click();
 await p.locator('[name=t5]').fill('13:30');assert.equal(await p.locator('[name=e5]').inputValue(),'14:30');await button('Save windows').click();assert.match(await p.locator('#main').innerText(),/13:30 – 14:30/);
@@ -29,9 +40,23 @@ await p.locator('#backupInput').setInputFiles({name:'backup.json',mimeType:'appl
 await nav('Today');await p.getByRole('button',{name:'Quick add 250 ml',exact:true}).click();assert.equal(await p.evaluate(()=>JSON.parse(localStorage.getItem('devwell-v2')).days[Object.keys(JSON.parse(localStorage.getItem('devwell-v2')).days).sort().at(-1)].water),1000);await p.getByLabel('Settings',{exact:true}).click();await p.getByRole('switch',{name:'Gentle animations'}).click();assert.equal(await p.locator('body.quiet-motion').count(),1);await p.reload();assert.equal(await p.locator('body.quiet-motion').count(),1);await nav('Routine');await button('Done').click();assert.equal(await button('Undo Breakfast').count(),1);await button('Remaining').click();assert.equal(await button('Undo Breakfast').count(),0);await button('All routines').click();const calendarEvent=p.waitForEvent('download');await button('Export weekday calendar').click();const calendar=await calendarEvent;const ics=await fs.readFile(await calendar.path(),'utf8');assert.equal((ics.match(/BEGIN:VEVENT/g)||[]).length,13);assert.match(ics,/BYDAY=MO,TU,WE,TH,FR/);
 const wasDark=await p.locator('body.dark').count();await p.getByLabel('Toggle theme').click();assert.equal(await p.locator('body.dark').count(),1-wasDark);await p.reload();assert.equal(await p.locator('body.dark').count(),1-wasDark);
 await p.waitForFunction(()=>navigator.serviceWorker.controller!==null);await context.setOffline(true);await p.reload();await nav('Food');await button('Add 250 ml').click();assert.match(await p.locator('.big').innerText(),/1250/);await context.setOffline(false);
-for(const width of [320,390,768,1440]){await p.setViewportSize({width,height:900});for(const name of ['Today','Routine','Food','Move','Insights']){await nav(name);assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,`${name} overflows at ${width}`)}}
+await fs.mkdir('test-results',{recursive:true});
+for(const width of [320,390,768,1440]){await p.setViewportSize({width,height:900});for(const name of ['Today','Routine','Food','Move','Insights']){await nav(name);assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,`${name} overflows at ${width}`);assert.equal(await p.evaluate(()=>[...document.querySelectorAll('[data-icon]')].every(el=>Object.hasOwn(DevWellIcons,el.dataset.icon))),true,'Every UI icon resolves in the original pack');if(width===390||width===1440)await p.screenshot({path:`test-results/${name.toLowerCase()}-${width}.png`,fullPage:true});if(name==='Food'){await button('+ Log meal').click();assert.equal(await p.evaluate(()=>document.querySelector('dialog').scrollWidth>document.querySelector('dialog').clientWidth),false,'Meal picker fits dialog');if(width===390)await p.screenshot({path:'test-results/meal-picker-light-390.png'});await close()}}}
 // Blocked storage must show a visible recovery message and keep in-memory actions working.
 const blocked=await browser.newContext();await blocked.addInitScript(()=>{Storage.prototype.setItem=function(){throw new Error('denied')};Storage.prototype.getItem=function(){throw new Error('denied')}});const bp=await blocked.newPage();await bp.goto(base);assert.equal(await bp.locator('#storageWarning').isVisible(),true);await bp.getByRole('navigation').getByRole('button',{name:'Food',exact:true}).click();await bp.getByRole('button',{name:'Add 250 ml',exact:true}).click();assert.match(await bp.locator('.big').innerText(),/250/);await blocked.close();
-assert.deepEqual(errors,[]);console.log('PASS: logs, escaping, reload persistence, routines, lunch duration, goals, mood, sleep, timers, captured date, history, backup/restore, calendar, theme, offline, 20 responsive screen checks, and blocked storage.');
+// Motion is available in every screen and device reduced-motion stops it.
+const motionContext=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'no-preference'});
+const mp=await motionContext.newPage();mp.on('pageerror',e=>errors.push(e.message));await mp.goto(base);
+for(const name of ['Today','Routine','Food','Move','Insights']){
+ if(name!=='Today')await mp.getByRole('navigation').getByRole('button',{name,exact:true}).click();
+ await mp.waitForFunction(()=>document.querySelector('main').getAnimations({subtree:true}).some(a=>a.playState==='running'));
+}
+await mp.emulateMedia({reducedMotion:'reduce'});await mp.waitForFunction(()=>document.body.classList.contains('quiet-motion'));
+assert.equal(await mp.evaluate(()=>document.querySelector('main').getAnimations({subtree:true}).filter(a=>a.playState==='running').length),0,'Reduced motion stops page and decorative animations');
+await mp.getByRole('navigation').getByRole('button',{name:'Food',exact:true}).click();await mp.getByRole('button',{name:'+ Log meal',exact:true}).click();
+await mp.screenshot({path:'test-results/meal-picker-dark-390.png'});
+await mp.getByRole('button',{name:'Close dialog'}).click();
+await mp.goto(new URL('assets/icons/preview.html',base).href);assert.equal(await mp.locator('figure').count(),38);await mp.screenshot({path:'test-results/orbit-icon-pack.png',fullPage:true});await motionContext.close();
+assert.deepEqual(errors,[]);console.log('PASS: logs, escaping, reload persistence, routines, lunch duration, goals, mood, sleep, timers, captured date, history, backup/restore, calendar, theme, offline, 20 responsive screen checks, blocked storage, themed meal radio controls and keyboard navigation, meal prefills, original icon coverage, motion across all screens, and device reduced-motion.');
 await browser.close();
 })().catch(e=>{console.error(e);process.exit(1)});

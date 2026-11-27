@@ -10,3 +10,36 @@ body.light{--bg:#f3f5fc;--surface:#ffffff;--surface-2:#e9edf8;--text:#171e34;--m
 .quiet-motion *,.quiet-motion *::before,.quiet-motion *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
 .movement-meter{min-width:0}.movement-meter>i{width:0;min-width:1px;flex:1 1 0}.movement-console .log{min-width:0}.routine-overview{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.routine-overview>.text-button{white-space:normal;line-height:1.5}.complete-button{position:relative}.complete-button:after{content:"";position:absolute;inset:-6px;border-radius:50%}@media(min-width:800px){.routine-overview{display:block}}@media(max-width:599px){.movement-console{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.header-tools .icon-button{height:44px;width:38px}.log-button{width:38px;height:40px;min-height:40px}}
+
+
+/* Pulse 3.1 — original Orbit icon family and consistent option states. */
+svg{stroke-width:1.75}
+.meal-kind-field{padding:0;margin:22px 0 24px;border:0;min-width:0}
+.meal-kind-field>legend{padding:0;margin-bottom:10px;font-size:13px;color:var(--muted)}
+.meal-kind-picker{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.meal-kind{display:flex;align-items:center;gap:10px;min-width:0;min-height:80px;padding:13px 12px;text-align:left;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;transition:background .2s,border-color .2s,box-shadow .2s}
+.meal-kind>span:nth-child(2){min-width:0;flex:1}
+.meal-kind b{display:block;font-size:13px;line-height:1.3}
+.meal-kind small{display:block;margin-top:4px;font-size:11px;line-height:1.4;color:var(--muted)}
+.meal-kind-icon{display:grid;place-items:center;color:var(--accent)}
+.meal-kind-icon svg{width:25px;height:25px}
+.meal-kind.selected{border-color:var(--action);background:color-mix(in srgb,var(--action) 7%,var(--surface));box-shadow:inset 0 0 0 1px var(--action)}
+.meal-kind.selected .meal-kind-icon{color:var(--action)}
+.choice-dot{width:17px;height:17px;border-radius:50%;border:1px solid var(--muted);display:grid;place-items:center;flex:none;transition:background .2s,border-color .2s}
+.choice-dot svg{width:12px;height:12px;opacity:0;transform:scale(.7);transition:opacity .2s,transform .2s}
+.meal-kind.selected .choice-dot{background:var(--action);border-color:var(--action);color:var(--action-text)}
+.meal-kind.selected .choice-dot svg{opacity:1;transform:scale(1)}
+.suggestion-chips button,.segmented button,.metric-tabs button,.mood-option,.day-selector button{transition:color .18s,background .18s,border-color .18s,box-shadow .18s}
+.idea-icon svg,.reset-start svg,.settings-actions button>svg:first-child,.settings-actions label>svg:first-child{transition:transform .3s var(--ease)}
+@media(hover:hover){.meal-kind:hover{border-color:var(--accent)}.meal-idea:hover .idea-icon svg{transform:translateY(-3px) rotate(-6deg)}.reset-start:hover svg{transform:translateX(3px)}.settings-actions button:hover>svg:first-child,.settings-actions label:hover>svg:first-child{transform:translateY(-2px)}}
+.bar{transform-origin:bottom}
+.reset-art-0>span{animation:focus-drift 7s ease-in-out infinite}
+.reset-art-1>span{animation:stretch-drift 7s ease-in-out infinite}
+.reset-art-2>span{animation:step-drift 4s ease-in-out infinite}
+.reset-art-3>span{animation:calm-drift 10s ease-in-out infinite}
+@keyframes focus-drift{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+@keyframes stretch-drift{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+@keyframes step-drift{0%,100%{transform:translateY(2px)}50%{transform:translateY(-3px)}}
+@keyframes calm-drift{0%,100%{transform:scale(.94)}40%{transform:scale(1.08)}}
+.motion-paused,.motion-paused *,.motion-paused::before,.motion-paused::after,.motion-paused *::before,.motion-paused *::after,.motion-suspended *,.motion-suspended *::before,.motion-suspended *::after{animation-play-state:paused!important}
+@media(max-width:359px){.meal-kind{gap:7px;padding:12px 9px}.meal-kind-icon svg{width:21px;height:21px}.meal-kind small{font-size:11px}.choice-dot{width:15px;height:15px}}

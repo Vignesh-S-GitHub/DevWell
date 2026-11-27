@@ -1,17 +1,23 @@
 <div align="center">
-  <img src="assets/icon.svg" alt="DevWell leaf mark" width="80">
+  <img src="assets/icon.svg" alt="DevWell Pulse-in-orbit mark" width="80">
   <h1>DevWell</h1>
   <p>Your day. In motion.</p>
   <p>Everyday wellness for screen-heavy workdays.</p>
 </div>
 
-**DevWell 3 — Pulse** turns small healthy breaks into a practical daily routine. It works on mobile and desktop, installs to your home screen and keeps your personal logs on your device.
+**DevWell 3.1 — Pulse** turns small healthy breaks into a practical daily routine. It works on mobile and desktop, installs to your home screen and keeps your personal logs on your device.
 
 ## Original Pulse design
 
 An entirely new identity replaces the earlier sage/pastel UI: midnight surfaces, electric blue, lime actions, a new pulse symbol and self-hosted Space Grotesk. Every screen, form, menu and dialog uses this system, including the matching light appearance.
 
 The homepage features an original generated pearlescent loop, live canvas orbits and particles, and pointer-responsive dimensional movement. Four floating controls show real water, movement, meal and sleep data. Animation respects the device and app motion preference, pauses offscreen, and stops when navigating away.
+
+## Pulse 3.1 refinements
+
+The original pulse-in-orbit logo and 38-icon Orbit set share rounded strokes and the app’s active palette. [Browse the icon gallery](https://vignesh-s-github.github.io/DevWell/assets/icons/preview.html) or reuse individual SVGs and the sprite in `assets/icons/`.
+
+Meal logging uses four in-app radio cards instead of the operating system’s select popup. Touch, keyboard arrows, Home/End and screen reader states work together; meal suggestions retain their selected type. Navigation, routines, food, movement and insights share page reveals and feedback. Progress changes animate from their previous value. Decorative movement pauses offscreen and in hidden tabs. Device reduced motion and the app’s motion switch disable animation.
 
 ## What works
 
@@ -25,9 +31,12 @@ The homepage features an original generated pearlescent loop, live canvas orbits
 
 ## Run locally
 
-No build step or runtime dependencies are needed to use the app.
+The app uses plain HTML, CSS and JavaScript with no runtime dependencies. Generate the installation PNGs from the SVG master once before serving:
 
 ```sh
+npm install
+npx playwright install chromium
+npm run build:icons
 python3 -m http.server 4173
 ```
 
@@ -37,7 +46,7 @@ Open `http://localhost:4173`. Use an HTTP server rather than opening `index.html
 
 1. Create a GitHub repository, such as `DevWell`, and push this folder's contents to its `main` branch.
 2. In **Settings → Pages → Build and deployment**, select **GitHub Actions** as the source.
-3. The included **Deploy DevWell to GitHub Pages** workflow tests the data model, packages only the app files and deploys the site. If needed, start it with **Actions → Deploy DevWell to GitHub Pages → Run workflow**.
+3. The included **Deploy DevWell to GitHub Pages** workflow generates installation icons, tests the data model and browser flows, checks an installed-cache upgrade, packages only the app files and deploys the site. If needed, start it with **Actions → Deploy DevWell to GitHub Pages → Run workflow**.
 4. Open the published link shown by the workflow or Pages settings. Install DevWell from your browser menu or Preferences.
 
 The paths and service-worker scope are relative, so the app supports a repository project path without configuration. Future pushes to `main` run the deployment again. No deployment secret or personal token is needed; the workflow uses GitHub's scoped token.
@@ -60,6 +69,7 @@ GitHub's workflow guidance: https://docs.github.com/en/pages/getting-started-wit
 npm test
 npm install
 npx playwright install chromium
+npm run build:icons
 # Start a local HTTP server in a separate terminal, then:
 npm run test:browser
 npm run test:upgrade
@@ -72,9 +82,13 @@ The browser test covers logs, escaping user content, reload persistence, edited 
 | File | Purpose |
 | --- | --- |
 | `index.html` | Accessible app shell |
-| `styles.css` | Prototype's visual system and responsive layout |
+| `styles.css` | Pulse visual system and responsive layout |
 | `app.js` | Core actions, timers, backups and installation |
 | `views.js` | Pulse screens, forms and dialogs |
+| `icons.js` | Original 38-icon Orbit family and compatibility aliases |
+| `motion.js` | Shared page reveals, progress feedback and visibility-aware motion |
+| `assets/icons/` | Standalone SVGs, sprite and dark/light gallery |
+| `scripts/build-icons.cjs` | Generate PWA PNGs from the SVG logo master |
 | `pulse.js` | Homepage canvas animation and lifecycle |
 | `model.js` | Data validation and prototype migration |
 | `sw.js` | Versioned offline app cache |

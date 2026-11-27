@@ -71,7 +71,7 @@ Controls use 9px corners, surfaces 16px, and dialogs 20px. The pulse symbol repl
 
 - The primary action is lime in dark mode and cobalt in light mode.
 - Navigation uses the same icon weight and selected indicator throughout.
-- Forms and select options use matching surfaces, text, focus, borders and native color-scheme.
+- Forms use matching surfaces, text, focus and borders. Meal type uses four themed radio cards, avoiding the platform select popup. Dates and times retain accessible native inputs.
 - Dialogs use the pulse symbol, close control, typography and action hierarchy on every task.
 - The homepage animation uses requestAnimationFrame, pointer parallax and visibility/resize observers. It pauses offscreen, when the document is hidden, and under reduced motion. It is disposed on route changes.
 - The timer has a real countdown and completion arc. Breathing cues follow a gentle 4/6 cycle; users can breathe comfortably at their own pace.
@@ -84,3 +84,10 @@ Controls use 9px corners, surfaces 16px, and dialogs 20px. The pulse symbol repl
 - Do respect animation preferences and device reduced motion.
 - Don't reintroduce the retired sage/pastel/clay theme or leaf identity.
 - Don't use the decorative animation as medical or measured health data.
+
+
+## Pulse 3.1 identity and motion
+
+The pulse-in-orbit logo combines two orbital arcs and a continuous health rhythm. The 38 original Orbit icons use 24px viewBoxes, rounded 1.75px strokes and currentColor. Meal, exercise, mood, navigation, utility and installation icons share this geometry. The SVG master generates 192px and 512px installation PNGs in CI. Standalone SVGs, a sprite and a preview gallery ship in assets/icons.
+
+Shared motion uses 280–550ms feedback and short staggered section entrances. Chart columns grow from their baseline; hydration changes interpolate from the preceding value; routine completion and new meal entries receive restrained feedback. Slow reset illustrations move only while visible. All loops pause in hidden tabs. Animations remain progressive enhancements: content and controls are available without them. Both user and device reduced-motion preferences stop CSS and scripted motion.
