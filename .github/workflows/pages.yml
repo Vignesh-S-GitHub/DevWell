@@ -1,0 +1,53 @@
+name: Deploy DevWell to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate JavaScript and data model
+        run: |
+          node --check app.js
+          node --check model.js
+          node --check sw.js
+          npm test
+      - name: Package app files
+        run: |
+          mkdir site
+          cp index.html styles.css model.js app.js sw.js manifest.webmanifest site/
+          cp -R assets site/assets
+          touch site/.nojekyll
+      - name: Upload app
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+  deploy:
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Set up Pages
+        uses: actions/configure-pages@v5
+      - name: Publish
+        id: deployment
+        uses: actions/deploy-pages@v5
