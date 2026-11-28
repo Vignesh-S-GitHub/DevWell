@@ -13,3 +13,9 @@ test('vibration preference defaults on and survives backup round trips when disa
  const db=normalize({settings:{haptics:false,water:2500},days:{'2026-11-27':{water:750}}});
  const restored=parseBackup(JSON.stringify(db));assert.equal(restored.settings.haptics,false);assert.equal(restored.settings.water,2500);assert.equal(restored.days['2026-11-27'].water,750);
 });
+
+test('notification categories survive backups and old backups receive compatible defaults',()=>{
+ const restored=parseBackup(JSON.stringify(normalize({settings:{notifications:true,routineNotifications:false,timerNotifications:false}})));
+ assert.equal(restored.settings.notifications,true);assert.equal(restored.settings.routineNotifications,false);assert.equal(restored.settings.timerNotifications,false);
+ assert.equal(normalize({settings:{notifications:true}}).settings.routineNotifications,true);assert.equal(normalize({}).settings.timerNotifications,true);
+});

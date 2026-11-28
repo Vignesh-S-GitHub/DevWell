@@ -5,7 +5,7 @@
   <p>Everyday wellness for screen-heavy workdays.</p>
 </div>
 
-**DevWell 3.2.0 — Pulse** turns small healthy breaks into a practical daily routine. It works on mobile and desktop, installs to your home screen and keeps your personal logs on your device.
+**DevWell 3.3.0 — Pulse** turns small healthy breaks into a practical daily routine. It works on mobile and desktop, installs to your home screen and keeps your personal logs on your device.
 
 ## Original Pulse design
 
@@ -30,6 +30,14 @@ The vibration test uses two 150ms pulses, separated by 80ms, to make a device ch
 ## Guided resets
 
 All four Move activities share animated ring previews and an elapsed-time progress ring. The inner ring animates during eye, stretch and walk timers too. Breathing uses the existing 4-second inhale / 6-second exhale cycle, with a two-tap inhale cue and one-tap exhale cue when vibration is enabled. Rings, text and haptics share the same timer clock. Pausing freezes progress, and resuming keeps the phase position. Hidden pages and disabled haptics stay quiet; returning synchronizes without replaying missed cues. Closing the timer panel keeps a running break and its foreground breathing cues active. Motion and vibration remain independent preferences.
+
+## Phone notifications
+
+The header bell and Preferences open a dedicated Notifications panel with permission status, an explicit enable action, a test notification, separate weekday routine and break-completion switches, upcoming windows and blocked-permission help. The browser is never prompted automatically. Android notifications use the service worker and DevWell icon; clicking one focuses the existing app and opens Routine or Move, or opens the relevant route in a new tab.
+
+Routine notifications use the 13 editable weekday windows and skip completed activities. A two-minute start-time grace period handles short timer delays without sending old reminders. Delivery receipts persist across reloads, and Web Locks serialize delivery across tabs where supported. Timer-complete alerts skip completions older than a minute. The app confirms requests, not physical banner/sound delivery; those are controlled by the browser and phone.
+
+This static GitHub Pages version has no push backend or reliable closed-app scheduler. Page timers may be delayed or stopped by phone background limits. Export the weekday calendar for reminders outside the app. The app does not silently add calendar events or upload personal logs.
 
 ## What works
 
@@ -99,6 +107,7 @@ The browser test covers logs, escaping user content, reload persistence, edited 
 | `app.js` | Core actions, timers, backups and installation |
 | `views.js` | Pulse screens, forms and dialogs |
 | `icons.js` | Original 38-icon Orbit family and compatibility aliases |
+| `notifications.js` | Permission checks, service-worker alerts and weekday reminder delivery |
 | `timer.js` | Shared countdown geometry and once-per-phase breathing cues |
 | `haptics.js` | Optional, bounded vibration with visibility and activation guards |
 | `motion.js` | Shared page reveals, progress feedback and visibility-aware motion |

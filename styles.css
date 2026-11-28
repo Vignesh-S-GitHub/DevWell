@@ -67,3 +67,25 @@ svg{stroke-width:1.75}
 @keyframes reset-orbit{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 
 .timer-progress-accessible{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* Notifications use the same Pulse controls and surface system. */
+#notifications{position:relative}#notifications.notifications-on:after{content:'';position:absolute;right:5px;top:5px;width:5px;height:5px;border-radius:50%;background:var(--action)}
+.notification-intro{display:grid;grid-template-columns:36px 1fr;gap:12px;align-items:center;margin:23px 0 20px}
+.notification-intro>span{height:36px;width:36px;display:grid;place-items:center;border:1px solid var(--line);border-radius:11px;color:var(--accent)}
+.notification-intro h3{font-size:19px;margin-bottom:5px}.notification-intro p{font-size:12px;color:var(--muted);line-height:1.6}
+.notification-state{grid-column:2;width:max-content;font-size:11px;border:1px solid var(--line);border-radius:20px;padding:2px 10px;color:var(--muted)}
+.notification-state.is-on{color:var(--action);border-color:var(--action)}
+.notification-actions{display:grid;gap:10px}.notification-actions button{min-height:44px;width:100%}
+.notification-result{line-height:1.7;margin:14px 0 20px}
+.notification-types{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.notification-types .preference-row:last-child{border-bottom:0}
+.notification-schedule{padding:24px 0}.notification-schedule .section-heading{margin-bottom:14px}.notification-schedule h3{font-size:15px}
+.notification-window{display:grid;grid-template-columns:24px 1fr auto;gap:10px;align-items:center;min-height:44px}
+.notification-window>span{color:var(--accent)}.notification-window svg{width:18px;height:18px}.notification-window b{font-size:12px}.notification-window time{color:var(--muted);font-size:11px}
+.notification-schedule>.text-button{margin-top:13px}
+.notification-limits{padding:17px;background:var(--surface-2);border:1px solid var(--line);border-radius:12px}
+.notification-limits>b{font-size:13px}.notification-limits p,.notification-help p{font-size:12px;color:var(--muted);line-height:1.75;margin-top:9px}
+.notification-limits .secondary{margin-top:15px;width:100%;min-height:44px;font-size:12px}
+.notification-help{margin-top:20px;font-size:12px}.notification-help summary{cursor:pointer;min-height:36px;padding-block:7px}
+.notification-help summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media(max-width:419px){.brand-edition{display:none}}

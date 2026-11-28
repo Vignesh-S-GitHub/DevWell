@@ -101,3 +101,8 @@ Meaningful feedback only: a 12ms tap for timer start/pause, 18ms for logged acti
 ## Guided ring resets
 
 All Move cards use circular ring previews with quiet orbital motion. A running card shows real elapsed progress. Every timer uses a shared progress arc and animated inner ring. Breathing expansion follows four seconds in and six seconds out, computed from the target timestamp rather than a separate CSS loop. Two short taps announce inhale; one pulse announces exhale. The same timing state drives visual cues and haptics, survives pause/resume, and deduplicates cue notifications. Hidden-page and disabled-vibration periods suppress cues without replaying missed phases on return. Reduced motion freezes decorative scaling but keeps text and progress readable.
+
+
+## Notifications
+
+A header bell gives direct access without crowding small phone widths; the small edition label yields space below 420px. Notifications use the same Pulse dialog, switches, focus states, icons and buttons. Permission status, a test action and persistent result distinguish opt-in, denial and delivery errors. Weekday routine and break-completion alerts have separate toggles. Upcoming windows use the existing edited schedule and device timezone. A visible scope note explains the running-app requirement and calendar option for closed-app reminders. Native phone notification styling, sound and vibration remain controlled by the operating system.

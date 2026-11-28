@@ -10,16 +10,17 @@
 <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="./assets/icon-192.png">
 <link rel="preload" href="./assets/fonts/space-grotesk.ttf" as="font" type="font/ttf" crossorigin>
-<link rel="stylesheet" href="./styles.css?v=3.2.0">
+<link rel="stylesheet" href="./styles.css?v=3.3.0">
 <title>DevWell Pulse — Your day, in motion</title>
-<script src="./model.js?v=3.2.0" defer></script>
-<script src="./icons.js?v=3.2.0" defer></script>
-<script src="./haptics.js?v=3.2.0" defer></script>
-<script src="./timer.js?v=3.2.0" defer></script>
-<script src="./app.js?v=3.2.0" defer></script>
-<script src="./views.js?v=3.2.0" defer></script>
-<script src="./pulse.js?v=3.2.0" defer></script>
-<script src="./motion.js?v=3.2.0" defer></script>
+<script src="./model.js?v=3.3.0" defer></script>
+<script src="./icons.js?v=3.3.0" defer></script>
+<script src="./haptics.js?v=3.3.0" defer></script>
+<script src="./timer.js?v=3.3.0" defer></script>
+<script src="./notifications.js?v=3.3.0" defer></script>
+<script src="./app.js?v=3.3.0" defer></script>
+<script src="./views.js?v=3.3.0" defer></script>
+<script src="./pulse.js?v=3.3.0" defer></script>
+<script src="./motion.js?v=3.3.0" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -28,7 +29,7 @@
 <div class="shell">
 <header class="site-header">
 <a href="#today" class="brand" aria-label="DevWell Pulse home"><span id="logo" class="brand-mark"></span><span>devwell<span class="brand-edition">PULSE</span></span></a>
-<div class="header-tools"><span id="connection" class="connection"></span><button id="theme" class="icon-button" aria-label="Toggle theme"></button><button id="settings" class="icon-button" aria-label="Settings"></button><button class="primary log-button" onclick="quickLog()" aria-label="Log activity"><span id="addIcon"></span><span>Log activity</span></button></div>
+<div class="header-tools"><span id="connection" class="connection"></span><button id="theme" class="icon-button" aria-label="Toggle theme"></button><button id="notifications" class="icon-button" aria-label="Notifications" aria-haspopup="dialog"></button><button id="settings" class="icon-button" aria-label="Settings"></button><button class="primary log-button" onclick="quickLog()" aria-label="Log activity"><span id="addIcon"></span><span>Log activity</span></button></div>
 </header>
 <nav id="nav" class="nav-dock" aria-label="Main navigation"></nav>
 <main id="main" tabindex="-1"></main>
