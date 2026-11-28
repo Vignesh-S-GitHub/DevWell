@@ -23,6 +23,26 @@
     const d = new Date(value + 'T12:00:00Z');
     return !Number.isNaN(d.valueOf()) && d.toISOString().slice(0,10) === value;
   }
+  const RETENTION_DAYS = 365;
+  function historyCutoff(today) {
+    if (!validDate(today)) throw new Error('A valid local calendar date is required for cleanup.');
+    // Date keys represent local calendar days. UTC date arithmetic avoids DST
+    // changing the number of retained days; today counts as the first day.
+    const cutoff = new Date(today + 'T12:00:00Z');
+    cutoff.setUTCDate(cutoff.getUTCDate() - (RETENTION_DAYS - 1));
+    return cutoff.toISOString().slice(0,10);
+  }
+  function pruneHistory(value, today) {
+    const cutoff = historyCutoff(today);
+    let removed = 0;
+    const days = value && value.days;
+    if (days && typeof days === 'object' && !Array.isArray(days)) {
+      for (const day of Object.keys(days)) {
+        if (validDate(day) && day < cutoff) { delete days[day]; removed++; }
+      }
+    }
+    return {cutoff, removed};
+  }
   function cleanDay(value) {
     const s = value && typeof value === 'object' ? value : {};
     return {
@@ -55,7 +75,7 @@
     if(!data || !data.days || typeof data.days!=='object' || Array.isArray(data.days) || !data.settings || typeof data.settings!=='object' || (data.schemaVersion && data.schemaVersion!==2)) throw new Error('This does not look like a supported DevWell backup.');
     return normalize(data);
   }
-  const api = {defaults,blank,normalize,parseBackup,validDate};
+  const api = {defaults,blank,normalize,parseBackup,validDate,RETENTION_DAYS,historyCutoff,pruneHistory};
   root.DevWellModel=api;
   if(typeof module!=='undefined') module.exports=api;
 })(globalThis);

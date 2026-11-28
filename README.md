@@ -5,7 +5,7 @@
   <p>Everyday wellness for screen-heavy workdays.</p>
 </div>
 
-**DevWell 3.3.0 — Pulse** turns small healthy breaks into a practical daily routine. It works on mobile and desktop, installs to your home screen and keeps your personal logs on your device.
+**DevWell 3.4.0 — Pulse** turns small healthy breaks into a practical daily routine. It works on mobile and desktop, installs to your home screen and keeps your personal logs on your device.
 
 ## Original Pulse design
 
@@ -38,6 +38,12 @@ The header bell and Preferences open a dedicated Notifications panel with permis
 Routine notifications use the 13 editable weekday windows and skip completed activities. A two-minute start-time grace period handles short timer delays without sending old reminders. Delivery receipts persist across reloads, and Web Locks serialize delivery across tabs where supported. Timer-complete alerts skip completions older than a minute. The app confirms requests, not physical banner/sound delivery; those are controlled by the browser and phone.
 
 This static GitHub Pages version has no push backend or reliable closed-app scheduler. Page timers may be delayed or stopped by phone background limits. Export the weekday calendar for reminders outside the app. The app does not silently add calendar events or upload personal logs.
+
+## Automatic 365-day history
+
+DevWell keeps today and the preceding 364 local calendar days. Complete daily records before that cutoff are automatically removed, including meals, routine completion, hydration, movement, sleep and mood. Date arithmetic is calendar-based, including leap years and daylight-saving transitions. Goals, routine windows, preferences and the active timer are preserved. An expired timer date cannot recreate an old daily record.
+
+Cleanup runs at startup, before saves/exports, on return to the app, and on the next local day while the app remains running. When the app is closed, cleanup happens on the next opening. Legacy `devwell-v1` daily history receives the same cutoff, without deleting its other fields or touching other projects’ browser data. Backups already downloaded remain untouched; restoring one previews and excludes expired daily records. The date picker prevents selecting an expired date. Preferences shows the retained range and automatic cleanup status.
 
 ## What works
 

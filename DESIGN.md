@@ -106,3 +106,8 @@ All Move cards use circular ring previews with quiet orbital motion. A running c
 ## Notifications
 
 A header bell gives direct access without crowding small phone widths; the small edition label yields space below 420px. Notifications use the same Pulse dialog, switches, focus states, icons and buttons. Permission status, a test action and persistent result distinguish opt-in, denial and delivery errors. Weekday routine and break-completion alerts have separate toggles. Upcoming windows use the existing edited schedule and device timezone. A visible scope note explains the running-app requirement and calendar option for closed-app reminders. Native phone notification styling, sound and vibration remain controlled by the operating system.
+
+
+## Automatic history cleanup
+
+The user selected an automatic 365-day rolling window. Keep today plus the preceding 364 local calendar days, using date-key arithmetic rather than a fixed number of milliseconds. Cleanup is automatic; no repeated confirmation or forced download is required. Preferences presents the policy, retained-from date, last runtime check and an export action. Restore preview explains that expired days are excluded. Active timer state and preferences remain independent of daily history. Browser closure pauses execution, so overdue cleanup runs on the next opening or return.

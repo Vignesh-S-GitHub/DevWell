@@ -1,6 +1,6 @@
 
 const paths=DevWellIcons;const I=n=>`<svg viewBox="0 0 24 24" aria-hidden="true" data-icon="${n}">${paths[n]||paths.pulse}</svg>`;
-const {blank,normalize,parseBackup,validDate}=DevWellModel;
+const {blank,normalize,parseBackup,validDate,RETENTION_DAYS,historyCutoff,pruneHistory}=DevWellModel;
 const keyDate=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
 let storageAvailable=true, savedData;
 try {const raw=localStorage.getItem('devwell-v2')||localStorage.getItem('devwell-v1');savedData=raw?JSON.parse(raw):{};} catch {storageAvailable=false;}
@@ -8,9 +8,33 @@ let db=normalize(savedData), routine=db.settings.routine;
 const haptics=DevWellHaptics.create({navigator,document,isEnabled:()=>db.settings.haptics});
 const phoneNotifications=DevWellNotifications.create({getNotification:()=>window.Notification,serviceWorker:navigator.serviceWorker,isSecure:()=>window.isSecureContext,getSettings:()=>db.settings,storage:{getItem:key=>localStorage.getItem(key),setItem:(key,value)=>localStorage.setItem(key,value),removeItem:key=>localStorage.removeItem(key)},locks:navigator.locks});
 let date=keyDate(),currentDay=keyDate(),page=['Today','Routine','Food','Move','Insights'].find(n=>n.toLowerCase()===location.hash.slice(1))||'Today';
-let timer=0,remaining=0,timerKind='',pendingBackup=null,installPrompt=null;
+let timer=0,remaining=0,timerKind='',pendingBackup=null,installPrompt=null,lastRetentionCheck='';
 const S=()=>db.days[date]||=(blank());
-function save(){try{localStorage.setItem('devwell-v2',JSON.stringify(db));storageAvailable=true;}catch{storageAvailable=false;}document.querySelector('#storageWarning').classList.toggle('hidden',storageAvailable);}
+function applyHistoryRetention(today=keyDate()){
+ const report=pruneHistory(db,today),expiredView=validDate(date)&&date<report.cutoff;
+ if(expiredView)date=today;
+ lastRetentionCheck=today;
+ return {...report,expiredView};
+}
+function cleanupLegacyHistory(today){
+ try{
+  const raw=localStorage.getItem('devwell-v1');if(!raw)return;
+  const legacy=JSON.parse(raw);
+  if(pruneHistory(legacy,today).removed)localStorage.setItem('devwell-v1',JSON.stringify(legacy));
+ }catch{}
+}
+function save(){
+ const today=keyDate(),cleanup=applyHistoryRetention(today);cleanupLegacyHistory(today);
+ try{localStorage.setItem('devwell-v2',JSON.stringify(db));storageAvailable=true}catch{storageAvailable=false}
+ document.querySelector('#storageWarning').classList.toggle('hidden',storageAvailable);
+ return cleanup;
+}
+function runRetentionCleanup(){
+ if(lastRetentionCheck===keyDate())return;
+ const report=applyHistoryRetention();save();
+ if((report.removed||report.expiredView)&&typeof render==='function')render();
+}
+
 const percent=(a,b)=>b>0?Math.max(0,Math.min(100,Math.round(a/b*100))):0;
 const progress=()=>percent(S().done.length,routine.length);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));let toastT;function toast(t){let el=document.querySelector('#toast');el.textContent=t;el.classList.remove('hidden');clearTimeout(toastT);toastT=setTimeout(()=>el.classList.add('hidden'),2200)}function update(t){save();render();if(t)toast(t)}function go(p){if(!navs.some(n=>n[0]===p))return;page=p;history.replaceState(null,'','#'+p.toLowerCase());render();window.scrollTo(0,0);document.querySelector('#main').focus({preventScroll:true})}function toggleTask(i){const a=S().done;let k=a.indexOf(i);k<0?a.push(i):a.splice(k,1);update(k<0?'Routine completed':'Routine reopened');if(k<0)haptics.play('success')}function water(n){const before=S().water;S().water=Math.min(20000,Math.max(0,before+n));update(n>0?'Water logged':'Water adjusted');if(n>0&&S().water>before)haptics.play('log')}function endLunch(t){let [h,m]=t.split(':').map(Number);return String((h+1)%24).padStart(2,'0')+':'+String(m).padStart(2,'0')}
@@ -25,7 +49,7 @@ function fmt(n){n=Math.max(0,Math.ceil(n));return `${String(Math.floor(n/60)).pa
 function discardTimer(){haptics.cancel();db.timer=null;remaining=0;save();render()}
 function resetTimer(i){haptics.cancel();db.timer={index:i,date:keyDate(),running:false,remaining:exercises[i][3],target:0};save();openTimer(i);render()}
 function startTimer(i){if(!db.timer)db.timer={index:i,date:keyDate(),running:false,remaining:exercises[i][3],target:0};const t=db.timer;if(t.running){haptics.cancel();t.remaining=Math.max(0,(t.target-Date.now())/1000);t.running=false;}else{t.target=Date.now()+t.remaining*1000;t.running=true;}save();openTimer(i);render();if(i!==3)haptics.play('tap')}
-function tickTimer(){const t=db.timer;if(!t||!t.running)return;remaining=Math.max(0,Math.ceil((t.target-Date.now())/1000));t.remaining=remaining;const count=document.querySelector('#count');if(count)count.textContent=fmt(remaining);const mini=document.querySelector('#activeTimerTime');if(mini)mini.textContent=fmt(remaining);if(remaining===0){const index=t.index;const logDay=t.date;db.timer=null;if(index===1||index===2){const day=db.days[logDay]||=(blank());day.minutes=Math.min(1440,day.minutes+Math.round(exercises[index][3]/60));}save();render();const status=document.querySelector('#timerStatus');if(status){status.textContent='Break complete.';document.querySelector('#startTimer').textContent='Start again';}toast('Break complete');if(Date.now()-t.target<=2000)haptics.play('complete');if(Date.now()-t.target<=60000)notify('Break complete',exercises[index][0]+' finished.',{kind:'timer',page:'Move',id:'timer-'+t.date+'-'+t.target+'-'+index});}}
+function tickTimer(){const t=db.timer;if(!t||!t.running)return;remaining=Math.max(0,Math.ceil((t.target-Date.now())/1000));t.remaining=remaining;const count=document.querySelector('#count');if(count)count.textContent=fmt(remaining);const mini=document.querySelector('#activeTimerTime');if(mini)mini.textContent=fmt(remaining);if(remaining===0){const index=t.index;const logDay=t.date;db.timer=null;if((index===1||index===2)&&logDay>=historyCutoff(keyDate())){const day=db.days[logDay]||=(blank());day.minutes=Math.min(1440,day.minutes+Math.round(exercises[index][3]/60));}save();render();const status=document.querySelector('#timerStatus');if(status){status.textContent='Break complete.';document.querySelector('#startTimer').textContent='Start again';}toast('Break complete');if(Date.now()-t.target<=2000)haptics.play('complete');if(Date.now()-t.target<=60000)notify('Break complete',exercises[index][0]+' finished.',{kind:'timer',page:'Move',id:'timer-'+t.date+'-'+t.target+'-'+index});}}
 
 function openSleep(){modal('Log sleep',`<form onsubmit="event.preventDefault();S().sleep=Number(this.hours.value);closeModal();update('Sleep logged')"><label class="field">Hours slept last night<input name="hours" type="number" min="0" max="24" step="0.5" value="${S().sleep||''}" required placeholder="7.5"></label><button class="primary">Save sleep</button></form>`)}function closeModal(){document.querySelector('#dialog').close()}document.querySelector('#dialog').addEventListener('click',e=>{if(e.target===e.currentTarget){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeModal()}});function settings(){const g=db.settings;modal('Your preferences',`<form onsubmit="saveSettings(event,this)"><label class="field">Hydration goal (ml)<input type="number" name="water" min="100" max="10000" step="100" required value="${g.water}"></label><label class="field">Movement goal (minutes)<input type="number" name="move" min="1" max="300" required value="${g.move}"></label><label class="field">Sleep goal (hours)<input type="number" name="sleep" min="1" max="24" step="0.5" required value="${g.sleep}"></label><button class="primary">Save preferences</button></form><hr><div class="stack"><button class="secondary" onclick="installApp()">Install DevWell</button><button class="secondary" onclick="toggleNotifications()">${g.notifications?'Turn off':'Enable'} app reminders</button><p class="muted">Reminders need permission and work while this app is open. Use calendar export for scheduled reminders outside the app.</p><button class="secondary" onclick="exportBackup()">Download backup</button><label class="secondary file-button">Restore backup<input id="backupInput" type="file" accept=".json,application/json" onchange="readBackup(this.files[0])"></label><button class="secondary danger" onclick="confirmReset()">Clear this browser’s data</button></div><p class="disclaimer">Your logs stay in this browser. Back up before switching devices or clearing browser data. DevWell does not connect to wearables or sync to the cloud.</p><p class="muted sub">DevWell · v2.0.0</p>`)}
 function saveSettings(event,form){event.preventDefault();db.settings.water=+form.elements.water.value;db.settings.move=+form.elements.move.value;db.settings.sleep=+form.elements.sleep.value;closeModal();update('Goals saved')}
@@ -34,8 +58,8 @@ const navs=[['Today','home'],['Routine','calendar'],['Food','food'],['Move','mov
 function dateBanner(){return date!==keyDate()?`<div class="context-banner" role="status"><span>Reviewing ${new Date(date+'T12:00').toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}</span><button class="link" onclick="date=keyDate();render()">Back to today</button></div>`:''}
 function timerBanner(){return db.timer?`<button class="context-banner timer-banner" onclick="openTimer(${db.timer.index})">${I('clock')}<span>${esc(exercises[db.timer.index][0])} · ${db.timer.running?'Running':'Paused'}</span><b id="activeTimerTime">${fmt(db.timer.remaining)}</b></button>`:''}
 function downloadFile(name,content,type){const url=URL.createObjectURL(new Blob([content],{type}));const link=document.createElement('a');link.href=url;link.download=name;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
-function exportBackup(){downloadFile('devwell-backup-'+keyDate()+'.json',JSON.stringify(db,null,2),'application/json');toast('Backup downloaded')}
-async function readBackup(file){if(!file)return;if(file.size>5*1024*1024){toast('Choose a backup smaller than 5 MB.');return}try{pendingBackup=parseBackup(await file.text());modal('Restore this backup?',`<p>This replaces the logs and preferences in this browser with ${Object.keys(pendingBackup.days).length} days from your backup.</p><p class="muted sub">Download your current backup first if you want to keep it.</p><button class="secondary sub" onclick="exportBackup()">Back up current data</button><button class="primary" onclick="restoreBackup()">Replace with backup</button><button class="secondary sub" onclick="pendingBackup=null;settings()">Cancel</button>`)}catch(error){toast(error.message);document.querySelector('#backupInput').value=''}}
+function exportBackup(){save();downloadFile('devwell-backup-'+keyDate()+'.json',JSON.stringify(db,null,2),'application/json');toast('Backup downloaded')}
+async function readBackup(file){if(!file)return;if(file.size>5*1024*1024){toast('Choose a backup smaller than 5 MB.');return}try{pendingBackup=parseBackup(await file.text());const cleanup=pruneHistory(pendingBackup,keyDate());modal('Restore this backup?',`<p>This replaces the logs and preferences in this browser with ${Object.keys(pendingBackup.days).length} retained days from your backup.</p><p class="muted">The 365-day history policy applies. ${cleanup.removed} older day record${cleanup.removed===1?'':'s'} will not be imported.</p><p class="muted sub">Download your current backup first if you want to keep it.</p><button class="secondary sub" onclick="exportBackup()">Back up current data</button><button class="primary" onclick="restoreBackup()">Replace with backup</button><button class="secondary sub" onclick="pendingBackup=null;settings()">Cancel</button>`)}catch(error){toast(error.message);document.querySelector('#backupInput').value=''}}
 function restoreBackup(){if(!pendingBackup)return;db=pendingBackup;db.timer=null;routine=db.settings.routine;pendingBackup=null;date=keyDate();closeModal();update('Backup restored')}
 function confirmReset(){modal('Clear local data?',`<p>This removes all DevWell logs and preferences from this browser. Download a backup if you want to keep them.</p><button class="secondary sub" onclick="exportBackup()">Download backup first</button><button class="primary danger-fill" onclick="resetData()">Clear all local data</button><button class="secondary sub" onclick="settings()">Keep my data</button>`)}
 function resetData(){try{localStorage.removeItem('devwell-v1');localStorage.removeItem('devwell-v2')}catch{}db=normalize({});routine=db.settings.routine;date=keyDate();phoneNotifications.clear();closeModal();update('Local data cleared')}
@@ -76,14 +100,14 @@ if(navigator.serviceWorker)navigator.serviceWorker.addEventListener('message',ev
  const data=event.data;if(data?.type!=='DEVWELL_NOTIFICATION_OPEN'||!navs.some(([name])=>name===data.page))return;
  closeModal();date=keyDate();go(data.page);
 });
-window.addEventListener('focus',()=>{if(typeof refreshNotificationPermission==='function')refreshNotificationPermission()});
+window.addEventListener('focus',()=>{runRetentionCleanup();if(typeof refreshNotificationPermission==='function')refreshNotificationPermission()});
 window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event});
 window.addEventListener('appinstalled',()=>{installPrompt=null;toast('DevWell installed')});
 async function installApp(){if(window.matchMedia('(display-mode: standalone)').matches){toast('DevWell is already installed');return}if(installPrompt){await installPrompt.prompt();installPrompt=null;return}modal('Install DevWell',`<p>On Android, open your browser menu and choose <b>Install app</b> or <b>Add to Home screen</b>.</p><p class="sub">On iPhone, open DevWell in Safari, tap <b>Share</b>, then <b>Add to Home Screen</b>.</p><p class="muted sub">Visit the HTTPS hosted app once before using it offline.</p>`)}
 window.addEventListener('hashchange',()=>{const match=navs.find(([name])=>name.toLowerCase()===location.hash.slice(1));if(match){page=match[0];render()}});
 window.addEventListener('online',()=>toast('You’re back online'));
 window.addEventListener('offline',()=>toast('Offline · Your logs still work on this device'));
-window.addEventListener('storage',event=>{if(event.key==='devwell-v2'&&event.newValue){try{db=normalize(JSON.parse(event.newValue));routine=db.settings.routine;if(!db.settings.haptics)haptics.cancel();render()}catch{}}});
-document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){tickTimer();checkReminders();refreshNotificationPermission()}});
+window.addEventListener('storage',event=>{if(event.key==='devwell-v2'&&event.newValue){try{db=normalize(JSON.parse(event.newValue));routine=db.settings.routine;const cleanup=applyHistoryRetention();if(cleanup.removed)save();if(!db.settings.haptics)haptics.cancel();render()}catch{}}});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){runRetentionCleanup();tickTimer();checkReminders();if(typeof refreshNotificationPermission==='function')refreshNotificationPermission()}});
 if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(reg=>{reg.update().catch(()=>{});reg.addEventListener('updatefound',()=>{const worker=reg.installing;worker?.addEventListener('statechange',()=>{if(worker.state==='installed'&&navigator.serviceWorker.controller)document.querySelector('#updateNotice').classList.remove('hidden')})})}).catch(()=>toast('Offline setup failed. Your logs still work while online.')))}
 
