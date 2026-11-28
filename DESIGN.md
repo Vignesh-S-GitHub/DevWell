@@ -1,6 +1,6 @@
 ---
 name: DevWell Pulse
-description: An original kinetic wellbeing interface.
+description: An original wellbeing interface with calm in-place animation.
 colors:
   background: "#0b0e17"
   surface: "#121722"
@@ -41,7 +41,7 @@ spacing:
 
 ## Overview
 
-The user explicitly rejected retaining the previous theme or building on top of its visual UI. Pulse replaces that presentation with a new identity: midnight, electric blue and acid lime; a new pulse symbol; Space Grotesk typography; a generated pearlescent loop; and a live canvas composition. The previous sage, pastel, leaf and clay design is retired.
+The user explicitly rejected retaining the previous theme or building on top of its visual UI. Pulse replaces that presentation with a new identity: midnight, electric blue and acid lime; a new pulse symbol; Space Grotesk typography; a generated pearlescent loop; and a fixed routine-progress composition. The previous sage, pastel, leaf and clay design is retired.
 
 Saved wellness data and working actions remain the product foundation. Presentation, layout, navigation, dialogs, forms and charts belong to the new Pulse system.
 
@@ -55,13 +55,13 @@ Space Grotesk is self-hosted under the SIL Open Font License. Large homepage typ
 
 ## Layout
 
-Desktop uses a full-width header, horizontal navigation and a two-part homepage composition. Mobile uses a compact header and bottom navigation. The home stage surrounds a kinetic sculpture with four real-data controls. A command strip offers immediate logs, followed by routine and mood surfaces.
+Desktop uses a full-width header, horizontal navigation and a two-part homepage composition. Mobile uses a compact header and bottom navigation. The home stage surrounds a fixed sculpture with four real-data controls. A command strip offers immediate logs, followed by routine and mood surfaces.
 
 Routine uses a completion overview alongside its timeline. Food uses hydration and a diary. Movement uses a goal meter and four resets. Insights uses actual historical values and recovery entries. Every surface uses the same components.
 
 ## Elevation & Depth
 
-Fine outlines and layered midnight surfaces establish depth. Floating controls use restrained neutral shadows. The original sculpture supplies physical dimensionality. The canvas contributes live orbital paths and particles.
+Fine outlines and layered midnight surfaces establish depth. Floating controls use restrained neutral shadows. The original sculpture supplies physical dimensionality. A thin progress arc frames the sculpture and shows actual routine completion.
 
 ## Shapes
 
@@ -73,7 +73,7 @@ Controls use 9px corners, surfaces 16px, and dialogs 20px. The pulse symbol repl
 - Navigation uses the same icon weight and selected indicator throughout.
 - Forms use matching surfaces, text, focus and borders. Meal type uses four themed radio cards, avoiding the platform select popup. Dates and times retain accessible native inputs.
 - Dialogs use the pulse symbol, close control, typography and action hierarchy on every task.
-- The homepage animation uses requestAnimationFrame, pointer parallax and visibility/resize observers. It pauses offscreen, when the document is hidden, and under reduced motion. It is disposed on route changes.
+- The homepage sculpture and data controls stay fixed. Shared in-place animations use Web Animations and CSS, with visibility observers and route disposal. There is no pointer parallax or continuous JavaScript rendering loop.
 - The timer has a real countdown and completion arc. Breathing cues follow a gentle 4/6 cycle; users can breathe comfortably at their own pace.
 
 ## Do's and Don'ts
@@ -86,11 +86,11 @@ Controls use 9px corners, surfaces 16px, and dialogs 20px. The pulse symbol repl
 - Don't use the decorative animation as medical or measured health data.
 
 
-## Pulse 3.1 identity and motion
+## Shared identity and animation
 
 The pulse-in-orbit logo combines two orbital arcs and a continuous health rhythm. The 38 original Orbit icons use 24px viewBoxes, rounded 1.75px strokes and currentColor. Meal, exercise, mood, navigation, utility and installation icons share this geometry. The SVG master generates 192px and 512px installation PNGs in CI. Standalone SVGs, a sprite and a preview gallery ship in assets/icons.
 
-Shared motion uses 280–550ms feedback and short staggered section entrances. Chart columns grow from their baseline; hydration changes interpolate from the preceding value; routine completion and new meal entries receive restrained feedback. Slow reset illustrations move only while visible. All loops pause in hidden tabs. Animations remain progressive enhancements: content and controls are available without them. Both user and device reduced-motion preferences stop CSS and scripted motion.
+Use short, in-place feedback (180–420ms), with no page/card travel, hover lift, spinning markers or drifting artwork. Chart columns grow from their baseline; hydration changes interpolate from the preceding value; routine checks draw and new meal entries fade in place. Routine, Food, Move and Insights have original fixed SVG instruments: draw the linework once and softly change accent opacity over six seconds. These decorative illustrations are aria-hidden and never represent measured data. Loops pause offscreen and in hidden tabs. Animations remain progressive enhancements. The persistent Gentle animations preference retains the existing settings.motion schema; user and device reduced-motion preferences stop nonessential CSS and scripted animation.
 
 
 ## Mobile haptics
@@ -100,7 +100,7 @@ Meaningful feedback only: a 12ms tap for timer start/pause, 18ms for logged acti
 
 ## Guided ring resets
 
-All Move cards use circular ring previews with quiet orbital motion. A running card shows real elapsed progress. Every timer uses a shared progress arc and animated inner ring. Breathing expansion follows four seconds in and six seconds out, computed from the target timestamp rather than a separate CSS loop. Two short taps announce inhale; one pulse announces exhale. The same timing state drives visual cues and haptics, survives pause/resume, and deduplicates cue notifications. Hidden-page and disabled-vibration periods suppress cues without replaying missed phases on return. Reduced motion freezes decorative scaling but keeps text and progress readable.
+All Move cards use fixed circular previews; only a running card’s marker softly changes opacity. A running card shows real elapsed progress. Every timer uses a shared progress arc. Non-breathing inner rings stay fixed and change light intensity. Breathing expansion follows four seconds in and six seconds out, computed from the target timestamp rather than a separate CSS loop. Two short taps announce inhale; one pulse announces exhale. The same timing state drives visual cues and haptics, survives pause/resume, and deduplicates cue notifications. Hidden-page and disabled-vibration periods suppress cues without replaying missed phases on return. Reduced motion freezes decorative scaling but keeps text and progress readable.
 
 
 ## Notifications

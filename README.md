@@ -1,23 +1,23 @@
 <div align="center">
   <img src="assets/icon.svg" alt="DevWell Pulse-in-orbit mark" width="80">
   <h1>DevWell</h1>
-  <p>Your day. In motion.</p>
+  <p>Your day. In balance.</p>
   <p>Everyday wellness for screen-heavy workdays.</p>
 </div>
 
-**DevWell 3.4.0 — Pulse** turns small healthy breaks into a practical daily routine. It works on mobile and desktop, installs to your home screen and keeps your personal logs on your device.
+**DevWell 3.5.0 — Pulse** turns small healthy breaks into a practical daily routine. It works on mobile and desktop, installs to your home screen and keeps your personal logs on your device.
 
 ## Original Pulse design
 
 An entirely new identity replaces the earlier sage/pastel UI: midnight surfaces, electric blue, lime actions, a new pulse symbol and self-hosted Space Grotesk. Every screen, form, menu and dialog uses this system, including the matching light appearance.
 
-The homepage features an original generated pearlescent loop, live canvas orbits and particles, and pointer-responsive dimensional movement. Four floating controls show real water, movement, meal and sleep data. Animation respects the device and app motion preference, pauses offscreen, and stops when navigating away.
+The homepage keeps the original generated pearlescent loop fixed in place, framed by actual routine progress. Four fixed controls show real water, movement, meal and sleep data. There is no drifting sculpture, pointer parallax, spinning decoration or page-entry travel. Routine, Food, Move and Insights have original animated line instruments in the same palette. Their geometry stays fixed while linework draws and small accents softly change opacity. Animation respects the device and app preference, pauses offscreen and in hidden tabs, and is disposed when navigating away.
 
 ## Pulse 3.1 refinements
 
 The original pulse-in-orbit logo and 38-icon Orbit set share rounded strokes and the app’s active palette. [Browse the icon gallery](https://vignesh-s-github.github.io/DevWell/assets/icons/preview.html) or reuse individual SVGs and the sprite in `assets/icons/`.
 
-Meal logging uses four in-app radio cards instead of the operating system’s select popup. Touch, keyboard arrows, Home/End and screen reader states work together; meal suggestions retain their selected type. Navigation, routines, food, movement and insights share page reveals and feedback. Progress changes animate from their previous value. Decorative movement pauses offscreen and in hidden tabs. Device reduced motion and the app’s motion switch disable animation.
+Meal logging uses four in-app radio cards instead of the operating system’s select popup. Touch, keyboard arrows, Home/End and screen reader states work together; meal suggestions retain their selected type. Routines, food, movement and insights share in-place confirmation feedback. Progress changes animate from their previous value. Device reduced motion and the app’s **Gentle animations** switch disable nonessential animation.
 
 ## Mobile vibration
 
@@ -29,7 +29,7 @@ The vibration test uses two 150ms pulses, separated by 80ms, to make a device ch
 
 ## Guided resets
 
-All four Move activities share animated ring previews and an elapsed-time progress ring. The inner ring animates during eye, stretch and walk timers too. Breathing uses the existing 4-second inhale / 6-second exhale cycle, with a two-tap inhale cue and one-tap exhale cue when vibration is enabled. Rings, text and haptics share the same timer clock. Pausing freezes progress, and resuming keeps the phase position. Hidden pages and disabled haptics stay quiet; returning synchronizes without replaying missed cues. Closing the timer panel keeps a running break and its foreground breathing cues active. Motion and vibration remain independent preferences.
+All four Move activities share animated ring previews and an elapsed-time progress ring. Eye, stretch and walk timers keep their inner ring fixed and animate its light; their elapsed-time arcs remain live. Breathing uses the existing 4-second inhale / 6-second exhale cycle, with a two-tap inhale cue and one-tap exhale cue when vibration is enabled. Rings, text and haptics share the same timer clock. Pausing freezes progress, and resuming keeps the phase position. Hidden pages and disabled haptics stay quiet; returning synchronizes without replaying missed cues. Closing the timer panel keeps a running break and its foreground breathing cues active. Visual animation and vibration remain independent preferences.
 
 ## Phone notifications
 
@@ -100,6 +100,10 @@ npm run build:icons
 npm run test:browser
 npm run test:upgrade
 npm run test:haptics
+npm run test:move
+npm run test:notifications
+npm run test:retention
+npm run test:animations
 ```
 
 The browser test covers logs, escaping user content, reload persistence, edited windows, one-hour lunch, goals, mood, sleep, timer resume and single completion, history, backup/restore, calendar export, theme, offline use, all five screens at 320/390/768/1440 pixels, and blocked storage. Use `BASE_URL` for a server hosting DevWell in a subdirectory and `CHROMIUM_EXECUTABLE_PATH` for a preinstalled browser.
@@ -116,10 +120,11 @@ The browser test covers logs, escaping user content, reload persistence, edited 
 | `notifications.js` | Permission checks, service-worker alerts and weekday reminder delivery |
 | `timer.js` | Shared countdown geometry and once-per-phase breathing cues |
 | `haptics.js` | Optional, bounded vibration with visibility and activation guards |
-| `motion.js` | Shared page reveals, progress feedback and visibility-aware motion |
+| `animations.js` | In-place progress/confirmation and visibility-aware animation |
+| `illustrations.js` | Theme-aware original line instruments for four section headers |
+| `assets/illustrations/` | Standalone animated SVG instruments and provenance |
 | `assets/icons/` | Standalone SVGs, sprite and dark/light gallery |
 | `scripts/build-icons.cjs` | Generate PWA PNGs from the SVG logo master |
-| `pulse.js` | Homepage canvas animation and lifecycle |
 | `model.js` | Data validation and prototype migration |
 | `sw.js` | Versioned offline app cache |
 | `manifest.webmanifest` | Installation metadata |

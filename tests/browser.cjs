@@ -7,7 +7,7 @@ const browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_EXEC
 const context=await browser.newContext({viewport:{width:390,height:844},acceptDownloads:true});
 const p=await context.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));
 const base=process.env.BASE_URL||'http://127.0.0.1:4173/';
-await p.goto(base);await p.waitForFunction(()=>!!document.querySelector('h1'));const frame1=await p.locator('#pulseCanvas').evaluate(c=>c.toDataURL());await p.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));const frame2=await p.locator('#pulseCanvas').evaluate(c=>c.toDataURL());assert.notEqual(frame1,frame2,'Homepage canvas must actually animate');
+await p.goto(base);await p.waitForFunction(()=>!!document.querySelector('h1'));assert.equal(await p.locator('#pulseCanvas').count(),0);assert.match(await p.locator('h1').innerText(),/In balance/);
 const nav=name=>p.getByRole('navigation').getByRole('button',{name,exact:true}).click();
 const button=name=>p.getByRole('button',{name,exact:true});
 const close=()=>p.getByRole('button',{name:'Close dialog'}).click();
@@ -46,7 +46,7 @@ await fs.mkdir('test-results',{recursive:true});
 for(const width of [320,390,768,1440]){await p.setViewportSize({width,height:900});for(const name of ['Today','Routine','Food','Move','Insights']){await nav(name);assert.equal(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false,`${name} overflows at ${width}`);assert.equal(await p.evaluate(()=>[...document.querySelectorAll('[data-icon]')].every(el=>Object.hasOwn(DevWellIcons,el.dataset.icon))),true,'Every UI icon resolves in the original pack');if(width===390||width===1440)await p.screenshot({path:`test-results/${name.toLowerCase()}-${width}.png`,fullPage:true});if(name==='Food'){await button('+ Log meal').click();assert.equal(await p.evaluate(()=>document.querySelector('dialog').scrollWidth>document.querySelector('dialog').clientWidth),false,'Meal picker fits dialog');if(width===390)await p.screenshot({path:'test-results/meal-picker-light-390.png'});await close()}}}
 // Blocked storage must show a visible recovery message and keep in-memory actions working.
 const blocked=await browser.newContext();await blocked.addInitScript(()=>{Storage.prototype.setItem=function(){throw new Error('denied')};Storage.prototype.getItem=function(){throw new Error('denied')}});const bp=await blocked.newPage();await bp.goto(base);assert.equal(await bp.locator('#storageWarning').isVisible(),true);await bp.getByRole('navigation').getByRole('button',{name:'Food',exact:true}).click();await bp.getByRole('button',{name:'Add 250 ml',exact:true}).click();assert.match(await bp.locator('.big').innerText(),/250/);await blocked.close();
-// Motion is available in every screen and device reduced-motion stops it.
+// In-place animation is available on every screen; reduced-motion stops it.
 const motionContext=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'no-preference'});
 const mp=await motionContext.newPage();mp.on('pageerror',e=>errors.push(e.message));await mp.goto(base);
 for(const name of ['Today','Routine','Food','Move','Insights']){
@@ -59,6 +59,6 @@ await mp.getByRole('navigation').getByRole('button',{name:'Food',exact:true}).cl
 await mp.screenshot({path:'test-results/meal-picker-dark-390.png'});
 await mp.getByRole('button',{name:'Close dialog'}).click();
 await mp.goto(new URL('assets/icons/preview.html',base).href);assert.equal(await mp.locator('figure').count(),38);await mp.screenshot({path:'test-results/orbit-icon-pack.png',fullPage:true});await motionContext.close();
-assert.deepEqual(errors,[]);console.log('PASS: logs, escaping, reload persistence, routines, lunch duration, goals, mood, sleep, timers, captured date, history, backup/restore, calendar, theme, offline, 20 responsive screen checks, blocked storage, themed meal radio controls and keyboard navigation, meal prefills, original icon coverage, motion across all screens, and device reduced-motion.');
+assert.deepEqual(errors,[]);console.log('PASS: logs, escaping, reload persistence, routines, lunch duration, goals, mood, sleep, timers, captured date, history, backup/restore, calendar, theme, offline, 20 responsive screen checks, blocked storage, themed meal radio controls and keyboard navigation, meal prefills, original icon coverage, in-place animation across all screens, and device reduced-motion.');
 await browser.close();
 })().catch(e=>{console.error(e);process.exit(1)});
