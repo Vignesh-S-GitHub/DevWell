@@ -7,3 +7,9 @@ test('migrates old logs, keeps goals and deduplicates completions',()=>{const db
 test('rejects unsupported backup shape and oversized files',()=>{for(const text of ['nope','{}','[]','{"days":[],"settings":{}}','{"days":{},"settings":{},"schemaVersion":99}','x'.repeat(5*1024*1024+1)])assert.throws(()=>parseBackup(text));assert.equal(parseBackup(JSON.stringify(normalize({}))).schemaVersion,2)});
 test('preserves paused and running timer state only when valid',()=>{const timer={index:2,date:'2026-11-27',running:true,remaining:150,target:Date.now()+150000};assert.deepEqual(normalize({timer}).timer,timer);assert.equal(normalize({timer:{...timer,index:9}}).timer,null)});
 test('backup content cannot inject routine names or corrupt numeric state',()=>{const db=normalize({days:{'2026-11-27':{water:Infinity,sleep:-2,meals:[{type:'Lunch',name:'  rice  '},null],done:['1',2]}},settings:{routine:Array.from({length:13},()=>['10:00','<script>bad</script>','x','x','10:15'])}});assert.equal(db.settings.routine[0][1],'Breakfast');assert.equal(db.days['2026-11-27'].water,0);assert.deepEqual(db.days['2026-11-27'].done,[2]);assert.equal(db.days['2026-11-27'].meals[0].name,'rice')});
+
+test('vibration preference defaults on and survives backup round trips when disabled',()=>{
+ assert.equal(normalize({}).settings.haptics,true);
+ const db=normalize({settings:{haptics:false,water:2500},days:{'2026-11-27':{water:750}}});
+ const restored=parseBackup(JSON.stringify(db));assert.equal(restored.settings.haptics,false);assert.equal(restored.settings.water,2500);assert.equal(restored.days['2026-11-27'].water,750);
+});

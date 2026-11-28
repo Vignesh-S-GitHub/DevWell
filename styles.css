@@ -43,3 +43,5 @@ svg{stroke-width:1.75}
 @keyframes calm-drift{0%,100%{transform:scale(.94)}40%{transform:scale(1.08)}}
 .motion-paused,.motion-paused *,.motion-paused::before,.motion-paused::after,.motion-paused *::before,.motion-paused *::after,.motion-suspended *,.motion-suspended *::before,.motion-suspended *::after{animation-play-state:paused!important}
 @media(max-width:359px){.meal-kind{gap:7px;padding:12px 9px}.meal-kind-icon svg{width:21px;height:21px}.meal-kind small{font-size:11px}.choice-dot{width:15px;height:15px}}
+
+.haptic-test{min-height:44px;margin:2px 0 9px}.haptic-note{max-width:340px;line-height:1.6;margin-bottom:17px}

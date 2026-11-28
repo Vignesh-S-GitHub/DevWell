@@ -91,3 +91,8 @@ Controls use 9px corners, surfaces 16px, and dialogs 20px. The pulse symbol repl
 The pulse-in-orbit logo combines two orbital arcs and a continuous health rhythm. The 38 original Orbit icons use 24px viewBoxes, rounded 1.75px strokes and currentColor. Meal, exercise, mood, navigation, utility and installation icons share this geometry. The SVG master generates 192px and 512px installation PNGs in CI. Standalone SVGs, a sprite and a preview gallery ship in assets/icons.
 
 Shared motion uses 280–550ms feedback and short staggered section entrances. Chart columns grow from their baseline; hydration changes interpolate from the preceding value; routine completion and new meal entries receive restrained feedback. Slow reset illustrations move only while visible. All loops pause in hidden tabs. Animations remain progressive enhancements: content and controls are available without them. Both user and device reduced-motion preferences stop CSS and scripted motion.
+
+
+## Mobile haptics
+
+Meaningful feedback only: a 12ms tap for timer start/pause, 18ms for logged activities, an 18/45/25ms double pulse for routine completion, and a 45/60/75ms completion signal for a just-finished reset. Numbers alternate vibration and silence. Navigation, scrolling, removing entries and repeated timer ticks are quiet. Rapid feedback is throttled; completion can override a smaller tap. Unsupported hardware and denied vibration never block actions. The persistent preference and test action use the same themed controls. Hidden documents and past timer completions do not trigger delayed haptics. Reduced visual motion remains a separate preference.

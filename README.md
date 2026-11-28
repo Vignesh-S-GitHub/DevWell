@@ -5,7 +5,7 @@
   <p>Everyday wellness for screen-heavy workdays.</p>
 </div>
 
-**DevWell 3.1 — Pulse** turns small healthy breaks into a practical daily routine. It works on mobile and desktop, installs to your home screen and keeps your personal logs on your device.
+**DevWell 3.1.1 — Pulse** turns small healthy breaks into a practical daily routine. It works on mobile and desktop, installs to your home screen and keeps your personal logs on your device.
 
 ## Original Pulse design
 
@@ -18,6 +18,12 @@ The homepage features an original generated pearlescent loop, live canvas orbits
 The original pulse-in-orbit logo and 38-icon Orbit set share rounded strokes and the app’s active palette. [Browse the icon gallery](https://vignesh-s-github.github.io/DevWell/assets/icons/preview.html) or reuse individual SVGs and the sprite in `assets/icons/`.
 
 Meal logging uses four in-app radio cards instead of the operating system’s select popup. Touch, keyboard arrows, Home/End and screen reader states work together; meal suggestions retain their selected type. Navigation, routines, food, movement and insights share page reveals and feedback. Progress changes animate from their previous value. Decorative movement pauses offscreen and in hidden tabs. Device reduced motion and the app’s motion switch disable animation.
+
+## Mobile vibration
+
+Short vibration feedback marks water, meal, movement, sleep and mood logs, routine completion, timer start/pause and break completion. Preferences includes a persistent **Vibration feedback** switch and **Test vibration** button. Vibration remains separate from visual motion settings.
+
+Haptics use the browser Vibration API, where available (typically Android Chromium browsers). iPhone/Safari and browsers without that API keep all visual feedback and tracking. The API cannot confirm a physical vibration motor: system settings, silent mode and browser policy can suppress vibration. Feedback requires interaction with the page and runs only while visible. Vibration is stopped when the app is hidden or the preference is disabled. An old timer still records completion, but does not vibrate on a later reload or return. This does not add closed-app or lock-screen vibration reminders.
 
 ## What works
 
@@ -73,6 +79,7 @@ npm run build:icons
 # Start a local HTTP server in a separate terminal, then:
 npm run test:browser
 npm run test:upgrade
+npm run test:haptics
 ```
 
 The browser test covers logs, escaping user content, reload persistence, edited windows, one-hour lunch, goals, mood, sleep, timer resume and single completion, history, backup/restore, calendar export, theme, offline use, all five screens at 320/390/768/1440 pixels, and blocked storage. Use `BASE_URL` for a server hosting DevWell in a subdirectory and `CHROMIUM_EXECUTABLE_PATH` for a preinstalled browser.
@@ -86,6 +93,7 @@ The browser test covers logs, escaping user content, reload persistence, edited 
 | `app.js` | Core actions, timers, backups and installation |
 | `views.js` | Pulse screens, forms and dialogs |
 | `icons.js` | Original 38-icon Orbit family and compatibility aliases |
+| `haptics.js` | Optional, bounded vibration with visibility and activation guards |
 | `motion.js` | Shared page reveals, progress feedback and visibility-aware motion |
 | `assets/icons/` | Standalone SVGs, sprite and dark/light gallery |
 | `scripts/build-icons.cjs` | Generate PWA PNGs from the SVG logo master |

@@ -1,13 +1,14 @@
 {
   "name": "devwell",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "private": true,
   "description": "A local-first wellness companion for software engineers",
   "scripts": {
     "build:icons": "node scripts/build-icons.cjs",
-    "test": "node --test tests/model.test.cjs",
+    "test": "node --test tests/*.test.cjs",
     "serve": "python3 -m http.server 4173",
     "test:browser": "node tests/browser.cjs",
+    "test:haptics": "node tests/haptics.browser.cjs",
     "test:upgrade": "node tests/upgrade.cjs"
   },
   "engines": {

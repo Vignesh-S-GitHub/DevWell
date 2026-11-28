@@ -1,0 +1,71 @@
+/* Logical/API integration only: desktop automation cannot verify a physical motor. */
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+(async()=>{
+ const browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_EXECUTABLE_PATH?{executablePath:process.env.CHROMIUM_EXECUTABLE_PATH,args:['--no-sandbox','--no-zygote','--disable-dev-shm-usage']}: {})});
+ try{
+  const base=process.env.BASE_URL||'http://127.0.0.1:4173/';
+  const context=await browser.newContext({viewport:{width:390,height:844}});
+  await context.addInitScript(()=>{
+   window.__vibrations=[];window.__clockOffset=0;const realNow=Date.now.bind(Date);Date.now=()=>realNow()+window.__clockOffset;
+   Object.defineProperty(navigator,'vibrate',{configurable:true,value:pattern=>{window.__vibrations.push(pattern);return true}});
+  });
+  const p=await context.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));await p.goto(base);
+  await p.getByRole('heading',{name:/Your day/}).waitFor();
+  const nav=name=>p.getByRole('navigation').getByRole('button',{name,exact:true}).click();
+  const button=name=>p.getByRole('button',{name,exact:true});
+  const advance=()=>p.evaluate(()=>{window.__clockOffset+=400});
+  const count=()=>p.evaluate(()=>window.__vibrations.filter(pattern=>pattern!==0).length);
+  assert.equal(await count(),0,'No vibration on page load');
+  await nav('Food');assert.equal(await count(),0,'Navigation stays quiet');
+  await button('Add 250 ml').click();assert.equal(await count(),1);
+  await advance();await p.evaluate(()=>water(-250));assert.equal(await count(),1,'Removing a log stays quiet');
+  await advance();await button('+ Log meal').click();assert.equal(await count(),1,'Opening a form stays quiet');
+  await p.getByLabel('What did you eat?').fill('Idli & sambar');await button('Save meal').click();assert.equal(await count(),2);
+  await advance();await nav('Move');await button('+ 5 min').click();assert.equal(await count(),3);
+  await advance();await nav('Routine');await button('Complete Breakfast').click();assert.equal(await count(),4);
+  assert.ok(Array.isArray(await p.evaluate(()=>window.__vibrations.filter(x=>x!==0).at(-1))));
+  await advance();await button('Undo Breakfast').click();assert.equal(await count(),4);
+  await nav('Move');await button('Start').nth(1).click();assert.equal(await count(),4,'Choosing a break stays quiet');
+  await advance();await p.locator('dialog').getByRole('button',{name:'Start',exact:true}).click();assert.equal(await count(),5);
+  await advance();await p.evaluate(()=>{db.timer.target=Date.now()-1;tickTimer();tickTimer()});
+  assert.equal(await count(),6,'Completion vibrates exactly once');
+  assert.equal(await p.evaluate(()=>S().minutes),8,'Timer still credits three minutes exactly once');
+  await p.getByRole('button',{name:'Close dialog'}).click();
+  // A stale timer catches up its data without a delayed vibration.
+  await advance();await p.evaluate(()=>{db.timer={index:1,date:keyDate(),running:true,remaining:1,target:Date.now()-10000};tickTimer()});
+  assert.equal(await count(),6,'No stale completion vibration');
+  await p.getByLabel('Settings',{exact:true}).click();
+  const vibration=p.getByRole('switch',{name:'Vibration feedback'});
+  assert.equal(await vibration.getAttribute('aria-checked'),'true');
+  await require('node:fs/promises').mkdir('test-results',{recursive:true});
+  for(const width of [320,390]){await p.setViewportSize({width,height:844});assert.equal(await p.locator('dialog').evaluate(el=>el.scrollWidth>el.clientWidth),false,'Vibration controls fit the mobile dialog')}
+  await p.screenshot({path:'test-results/haptics-settings-dark-390.png'});
+  await button('Test vibration').click();assert.match(await p.locator('#toast').innerText(),/requested/);
+  await vibration.click();assert.equal(await vibration.getAttribute('aria-checked'),'false');
+  assert.equal(await button('Test vibration').isDisabled(),true);
+  await p.reload();await p.getByLabel('Settings',{exact:true}).click();
+  assert.equal(await vibration.getAttribute('aria-checked'),'false','Preference survives reload');
+  await p.getByRole('button',{name:'Close dialog'}).click();await nav('Food');await button('Add 250 ml').click();assert.equal(await count(),0,'Disabled vibration stays off after reload');
+  await p.getByLabel('Settings',{exact:true}).click();await vibration.click();
+  await p.getByRole('button',{name:'Close dialog'}).click();
+  const before=await count();await advance();
+  await p.evaluate(()=>{Object.defineProperty(document,'visibilityState',{configurable:true,value:'hidden'});document.dispatchEvent(new Event('visibilitychange'));water(250)});
+  assert.equal(await count(),before,'Hidden page cannot trigger vibration');
+  await p.evaluate(()=>{delete document.visibilityState;Object.defineProperty(navigator,'vibrate',{configurable:true,value:()=>{throw new Error('denied')}})});
+  await advance();await button('Add 250 ml').click();assert.match(await p.locator('.big').innerText(),/750/);
+  assert.deepEqual(errors,[]);
+  await context.close();
+  const unsupported=await browser.newContext();
+  await unsupported.addInitScript(()=>Object.defineProperty(navigator,'vibrate',{configurable:true,value:undefined}));
+  const up=await unsupported.newPage();await up.goto(base);
+  await up.getByLabel('Settings',{exact:true}).click();
+  assert.equal(await up.getByRole('switch',{name:'Vibration feedback'}).isDisabled(),true);
+  assert.equal(await up.getByRole('button',{name:'Test vibration'}).isDisabled(),true);
+  await up.getByRole('button',{name:'Close dialog'}).click();
+  await up.getByRole('navigation').getByRole('button',{name:'Food',exact:true}).click();
+  await up.getByRole('button',{name:'Add 250 ml',exact:true}).click();assert.match(await up.locator('.big').innerText(),/250/);
+  await unsupported.close();
+  console.log('PASS: vibration activity hooks, quiet navigation/removals, once-only timer completion, stale-timer suppression, persistent toggle, test action, hidden-page guard, browser-denial fallback and unsupported-browser tracking.');
+ }finally{await browser.close()}
+})().catch(error=>{console.error(error);process.exit(1)});
