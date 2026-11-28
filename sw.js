@@ -1,6 +1,6 @@
-const CACHE = 'devwell-shell-v3.6.0';
+const CACHE = 'devwell-shell-v3.7.0';
 const ROOT = new URL('./', self.location).pathname;
-const FILES = ['./','./index.html','./styles.css?v=3.6.0','./model.js?v=3.6.0','./app.js?v=3.6.0','./haptics.js?v=3.6.0','./timer.js?v=3.6.0','./notifications.js?v=3.6.0','./views.js?v=3.6.0','./icons.js?v=3.6.0','./animations.js?v=3.6.0','./illustrations.js?v=3.6.0','./manifest.webmanifest','./assets/icon.svg','./assets/icon-192.png','./assets/icon-512.png','./assets/art/pulse.webp','./assets/fonts/space-grotesk.ttf'];
+const FILES = ['./','./index.html','./styles.css?v=3.7.0','./model.js?v=3.7.0','./app.js?v=3.7.0','./activity.js?v=3.7.0','./stretches.js?v=3.7.0','./feedback.js?v=3.7.0','./haptics.js?v=3.7.0','./timer.js?v=3.7.0','./notifications.js?v=3.7.0','./views.js?v=3.7.0','./icons.js?v=3.7.0','./animations.js?v=3.7.0','./illustrations.js?v=3.7.0','./manifest.webmanifest','./assets/icon.svg','./assets/icon-192.png','./assets/icon-512.png','./assets/art/pulse.webp','./assets/fonts/space-grotesk.ttf'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES).then(()=>self.skipWaiting()))));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('devwell-shell-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',event=>{

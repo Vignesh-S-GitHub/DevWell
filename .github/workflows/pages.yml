@@ -28,6 +28,9 @@ jobs:
         run: npm run build:icons
       - name: Validate JavaScript and data model
         run: |
+          node --check activity.js
+          node --check stretches.js
+          node --check feedback.js
           node --check app.js
           node --check views.js
           node --check icons.js
@@ -51,6 +54,7 @@ jobs:
           npm run test:notifications
           npm run test:retention
           npm run test:animations
+          npm run test:features
           npm run test:upgrade
       - name: Save screen previews
         if: always()
@@ -62,7 +66,7 @@ jobs:
       - name: Package app files
         run: |
           mkdir site
-          cp index.html styles.css model.js icons.js haptics.js timer.js notifications.js app.js views.js illustrations.js animations.js sw.js manifest.webmanifest site/
+          cp index.html styles.css model.js activity.js feedback.js stretches.js icons.js haptics.js timer.js notifications.js app.js views.js illustrations.js animations.js sw.js manifest.webmanifest site/
           cp -R assets site/assets
           touch site/.nojekyll
       - name: Upload app
@@ -91,14 +95,14 @@ jobs:
           node --input-type=module <<'NODE'
           const base=process.env.DEVWELL_URL;
           for(let attempt=0;attempt<12;attempt++){
-            const response=await fetch(base+'?release=3.6.0',{cache:'no-store'});
+            const response=await fetch(base+'?release=3.7.0',{cache:'no-store'});
             const html=await response.text();
-            if(response.ok&&html.includes('animations.js?v=3.6.0')&&html.includes('icons.js?v=3.6.0')){
-              for(const path of ['icons.js?v=3.6.0','animations.js?v=3.6.0','illustrations.js?v=3.6.0','haptics.js?v=3.6.0','timer.js?v=3.6.0','notifications.js?v=3.6.0','assets/icon.svg','assets/icon-192.png','assets/icon-512.png','assets/icons/preview.html']){
+            if(response.ok&&html.includes('animations.js?v=3.7.0')&&html.includes('icons.js?v=3.7.0')){
+              for(const path of ['activity.js?v=3.7.0','feedback.js?v=3.7.0','stretches.js?v=3.7.0','icons.js?v=3.7.0','animations.js?v=3.7.0','illustrations.js?v=3.7.0','haptics.js?v=3.7.0','timer.js?v=3.7.0','notifications.js?v=3.7.0','assets/icon.svg','assets/icon-192.png','assets/icon-512.png','assets/icons/preview.html']){
                 const asset=await fetch(new URL(path,base));
                 if(!asset.ok)throw new Error('Missing published asset: '+path);
               }
-              console.log('Published Pulse 3.6.0 and original logo/icon assets verified.');process.exit(0);
+              console.log('Published Pulse 3.7.0 and original logo/icon assets verified.');process.exit(0);
             }
             await new Promise(resolve=>setTimeout(resolve,5000));
           }

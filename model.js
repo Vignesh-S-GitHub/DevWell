@@ -16,7 +16,7 @@
     ['18:20','Mindful pause','Breathe and relax','heart','18:25'],
     ['19:00','After-work walk','Close your workday','move','19:30']
   ];
-  const blank = () => ({water:0, meals:[], minutes:0, sleep:0, done:[], mood:''});
+  const blank = () => ({water:0, meals:[], minutes:0, sleep:0, done:[], mood:'', celebrated:[]});
   const number = (x,min,max,fallback=0) => typeof x === 'number' && Number.isFinite(x) && x >= min && x <= max ? x : fallback;
   function validDate(value) {
     if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
@@ -49,7 +49,8 @@
       water: number(s.water,0,20000), minutes: number(s.minutes,0,1440), sleep: number(s.sleep,0,24),
       meals: (Array.isArray(s.meals) ? s.meals : []).slice(0,40).filter(m=>m && typeof m.name==='string' && ['Breakfast','Lunch','Snack','Dinner'].includes(m.type)).map(m=>({type:m.type,name:m.name.trim().slice(0,120)})).filter(m=>m.name),
       done: [...new Set((Array.isArray(s.done) ? s.done : []).filter(i=>Number.isInteger(i) && i>=0 && i<13))],
-      mood: ['Good','Okay','Tired','Stressed'].includes(s.mood) ? s.mood : ''
+      mood: ['Good','Okay','Tired','Stressed'].includes(s.mood) ? s.mood : '',
+      celebrated: [...new Set((Array.isArray(s.celebrated)?s.celebrated:[]).filter(kind=>['water','move','routine'].includes(kind)))]
     };
   }
   function normalize(value) {

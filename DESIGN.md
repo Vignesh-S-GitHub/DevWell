@@ -111,3 +111,8 @@ A header bell gives direct access without crowding small phone widths; the small
 ## Automatic history cleanup
 
 The user selected an automatic 365-day rolling window. Keep today plus the preceding 364 local calendar days, using date-key arithmetic rather than a fixed number of milliseconds. Cleanup is automatic; no repeated confirmation or forced download is required. Preferences presents the policy, retained-from date, last runtime check and an export action. Restore preview explains that expired days are excluded. Active timer state and preferences remain independent of daily history. Browser closure pauses execution, so overdue cleanup runs on the next opening or return.
+
+
+## Goal feedback, Undo and illustrated stretches
+
+Achievement banners use the existing Pulse surfaces, rounded icon language and accent/action colours. Use brief local spark/line animation and a text fallback under reduced motion; never move page containers. Keep Undo available without stealing focus, with a 44px action, captured-date semantics and focus/hover timing protection. Move the shared feedback host into an open native dialog so controls stay in its top layer. The stretch guide uses a compact clock, original stroke-based pose diagram, explicit step title, instructions, phase cue, six-step progress and Start/Pause/Reset/Stop controls. Announce phase changes, not every countdown tick. Pose animation follows the shared timer; reduced motion displays static phase illustrations. Both appearances and narrow dialogs use the same components.

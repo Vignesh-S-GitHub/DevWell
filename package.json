@@ -1,6 +1,6 @@
 {
   "name": "devwell",
-  "version": "3.6.0",
+  "version": "3.7.0",
   "private": true,
   "description": "A local-first wellness companion for software engineers",
   "scripts": {
@@ -13,7 +13,8 @@
     "test:notifications": "node tests/notifications.browser.cjs",
     "test:move": "node tests/move.browser.cjs",
     "test:haptics": "node tests/haptics.browser.cjs",
-    "test:upgrade": "node tests/upgrade.cjs"
+    "test:upgrade": "node tests/upgrade.cjs",
+    "test:features": "node tests/features.browser.cjs"
   },
   "engines": {
     "node": ">=20"

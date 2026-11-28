@@ -1,12 +1,40 @@
-# Pulse validation
+# 🧪 DevWell validation
 
-The original Pulse interface replaces the previous visual system completely. Its five screens, light appearance and preferences dialog were captured and inspected at mobile and desktop sizes.
+GitHub Actions validates every release before publishing the production artifact.
 
-- Six data-model tests cover safe defaults, dates, existing logs, imported backups and timer state.
-- Browser integration covers all health logs, escaping user input, persistence, routine editing, the one-hour lunch, timers, history, backup/restore, calendar export, theme, motion preference, filters and unavailable storage.
-- The homepage canvas is tested by comparing actual successive rendered frames, rather than simply checking for an animation class.
-- Every screen is checked for horizontal overflow at 320, 390, 768 and 1440 pixels. A narrow-screen movement-meter issue was corrected.
-- The installed-cache upgrade regression verifies that earlier logs, goals and theme data remain available in the complete new offline application at a project subpath.
-- Animation is bounded to the homepage. Resize/intersection observers, route cleanup and hidden-document handling stop unnecessary frame work. Reduced motion uses a static canvas.
+## Setup
 
-OS installation prompts and notification delivery still depend on the user's device/browser permissions. Reminders require the open app; the calendar export is the separate option for scheduled reminders. Data remains local, without cloud or wearable sync.
+```sh
+npm install
+npx playwright install chromium
+npm run build:icons
+npm test
+npm run serve
+```
+
+With the HTTP server running, execute the browser suites in another terminal. Set `BASE_URL` for a different origin/project path and `CHROMIUM_EXECUTABLE_PATH` for an installed browser.
+
+| Command | Coverage |
+| --- | --- |
+| `npm test` | Pure validation, retention, notifications, haptics, timer, activity/Undo and stretch rules |
+| `npm run test:browser` | Logs, forms, escaping, keyboard controls, persistence, backups, calendar, theme, offline and responsive screens |
+| `npm run test:haptics` | Action hooks, activation/visibility guards, once-only cues and device fallbacks |
+| `npm run test:move` | Activity rings, fractional pause/resume, breathing phases and responsive timers |
+| `npm run test:notifications` | Opt-in permissions, worker delivery, categories, deduplication, click routing and fallback states |
+| `npm run test:retention` | 365-day boundaries, daily cleanup, long closures, restore/export, cross-tab updates and offline startup |
+| `npm run test:animations` | Steady tab changes, actual artwork animation, phase continuity, visibility pause and reduced motion |
+| `npm run test:features` | Three goal celebrations, reload-safe receipts, field-safe/captured-date Undo, expiry/focus, modal feedback, guided stretch steps/cues/credit and responsive layouts |
+| `npm run test:upgrade` | Installed old-cache upgrade at a GitHub Pages subpath while preserving logs and offline access |
+
+## Important checks
+
+- Undo must never roll back another field, recreate expired history, overwrite a changed field or restart a completed timer.
+- Crossing a goal celebrates once per stored day/category, including after Undo, reload and backup normalization.
+- Stretch text, pose, hold/relax cues and rings derive from the existing absolute timer target. Pause/reload/closed panels preserve the same step.
+- Hidden pages and disabled haptics do not replay missed stretch or breathing cues.
+- Stopping a partial guided stretch adds no minutes; completion credits once on the retained start date.
+- Reduced visual animation keeps goal status, Undo controls, text, countdown and independently enabled haptics available.
+- No page/card entry transform may reintroduce the tab-switch wiggle.
+- Mobile layouts and native dialogs must fit their viewport; both themes are captured for the new guide.
+
+Screenshots are written to `test-results/` and retained in the workflow’s screen-preview artifact. Mocks verify browser API integration; physical phone vibration, notification presentation and installation prompts still require the actual device/browser.

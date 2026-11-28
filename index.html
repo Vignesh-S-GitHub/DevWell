@@ -10,17 +10,20 @@
 <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="./assets/icon-192.png">
 <link rel="preload" href="./assets/fonts/space-grotesk.ttf" as="font" type="font/ttf" crossorigin>
-<link rel="stylesheet" href="./styles.css?v=3.6.0">
+<link rel="stylesheet" href="./styles.css?v=3.7.0">
 <title>DevWell Pulse — Your day, in balance</title>
-<script src="./model.js?v=3.6.0" defer></script>
-<script src="./icons.js?v=3.6.0" defer></script>
-<script src="./haptics.js?v=3.6.0" defer></script>
-<script src="./timer.js?v=3.6.0" defer></script>
-<script src="./notifications.js?v=3.6.0" defer></script>
-<script src="./app.js?v=3.6.0" defer></script>
-<script src="./illustrations.js?v=3.6.0" defer></script>
-<script src="./views.js?v=3.6.0" defer></script>
-<script src="./animations.js?v=3.6.0" defer></script>
+<script src="./model.js?v=3.7.0" defer></script>
+<script src="./icons.js?v=3.7.0" defer></script>
+<script src="./haptics.js?v=3.7.0" defer></script>
+<script src="./timer.js?v=3.7.0" defer></script>
+<script src="./notifications.js?v=3.7.0" defer></script>
+<script src="./activity.js?v=3.7.0" defer></script>
+<script src="./stretches.js?v=3.7.0" defer></script>
+<script src="./app.js?v=3.7.0" defer></script>
+<script src="./illustrations.js?v=3.7.0" defer></script>
+<script src="./feedback.js?v=3.7.0" defer></script>
+<script src="./views.js?v=3.7.0" defer></script>
+<script src="./animations.js?v=3.7.0" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -35,7 +38,7 @@
 <main id="main" tabindex="-1"></main>
 <footer class="site-footer"><span>DevWell Pulse<span class="footer-dot">·</span>A little better, every day.</span><span id="topDate"></span><span>Stored on your device </span></footer>
 </div>
-<div id="toast" class="toast hidden" role="status"></div>
+<div id="feedbackLayer" class="feedback-layer"><div id="toast" class="toast hidden" role="status"></div></div>
 <dialog id="dialog" aria-labelledby="dialogTitle"></dialog>
 <noscript>Enable JavaScript to track your daily wellness with DevWell.</noscript>
 </body></html>

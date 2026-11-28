@@ -29,3 +29,8 @@ Quick actions support one-tap water/movement entries and a global logging sheet.
 
 
 Pulse introduces a new default dark appearance once, while preserving health data and goals. Subsequent dark/light preferences persist within the new system. All screens and controls share that theme. Animations pause offscreen and on hidden tabs; device reduced motion and the persistent Gentle animations preference stop nonessential effects. The user clarified that only the tab-switch wiggle should be removed. Keep page layouts, headings and cards steady on navigation while artwork remains alive: a spinning home loop, flowing/bubbling water, orbiting reset markers, repeated Routine linework and animated Insights instruments. Preserve functional data progress, activity-ring pulses and the 4/6 breathing guide. Decorative artwork must not change recorded values.
+
+
+## Selected production features · 3.7.0
+
+Scope is limited to once-daily water/movement/routine celebrations, one field-safe Undo after logging, and a six-step illustrated three-minute seated stretch guide. Preserve the existing theme, five screens, steady navigation, animations, haptics and local-only storage. Undo expires after ten available seconds, pauses for focus/hover/hidden state, uses the captured date and latest saved field, and never revives a completed timer. Celebration receipts belong to retained daily history. Guided steps and tactile cues share the existing timer target; a partial Stop adds no minutes. Remove superseded UI implementations and unused timer state, and document current application behaviour in README.md.
