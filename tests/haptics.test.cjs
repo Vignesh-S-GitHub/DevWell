@@ -43,3 +43,14 @@ test('disposing a controller removes its visibility listener',()=>{
  const f=fixture();f.haptics.play('complete');f.haptics.dispose();const count=f.calls.length;
  f.page.visibilityState='hidden';f.page.dispatchEvent(new Event('visibilitychange'));assert.equal(f.calls.length,count);
 });
+
+test('diagnostics distinguish every gating and browser outcome',()=>{
+ const cases=[
+  [{supported:false},'unsupported'],[{enabled:false},'disabled'],[{visible:false},'hidden'],[{activated:false},'activation-required'],[{result:false},'declined'],[{},'accepted']
+ ];
+ for(const [options,reason]of cases){const f=fixture(options);f.haptics.play('test');assert.equal(f.haptics.lastResult().reason,reason);assert.equal(f.haptics.lastResult().accepted,reason==='accepted');f.haptics.dispose()}
+ const f=fixture();f.haptics.play('log');f.haptics.play('tap');assert.equal(f.haptics.lastResult().reason,'throttled');f.haptics.play('nope');assert.equal(f.haptics.lastResult().reason,'invalid-action');f.navigator.vibrate=()=>{throw new Error('denied')};f.haptics.play('test');assert.equal(f.haptics.lastResult().reason,'exception');f.haptics.dispose();
+});
+test('explicit device test remains noticeable and can run immediately after enabling',()=>{
+ const f=fixture();f.haptics.play('tap');assert.equal(f.haptics.play('test'),true);const pulse=f.calls.at(-1);assert.ok(Array.isArray(pulse));assert.equal(pulse.length,3);assert.ok(pulse[0]>=100&&pulse[2]>=100);assert.ok(pulse.reduce((a,b)=>a+b,0)<=500);f.haptics.dispose();
+});

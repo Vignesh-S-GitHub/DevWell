@@ -45,3 +45,5 @@ svg{stroke-width:1.75}
 @media(max-width:359px){.meal-kind{gap:7px;padding:12px 9px}.meal-kind-icon svg{width:21px;height:21px}.meal-kind small{font-size:11px}.choice-dot{width:15px;height:15px}}
 
 .haptic-test{min-height:44px;margin:2px 0 9px}.haptic-note{max-width:340px;line-height:1.6;margin-bottom:17px}
+
+.haptic-result{line-height:1.65;margin:0 0 12px}.haptic-help{font-size:12px;color:var(--muted);margin:0 0 22px}.haptic-help summary{cursor:pointer;color:var(--text);min-height:32px;padding-block:5px}.haptic-help summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}.haptic-help ol{padding-left:20px;margin:9px 0}.haptic-help li{padding-left:3px;margin:7px 0}.haptic-help p{line-height:1.6}

@@ -5,7 +5,7 @@
   <p>Everyday wellness for screen-heavy workdays.</p>
 </div>
 
-**DevWell 3.1.1 — Pulse** turns small healthy breaks into a practical daily routine. It works on mobile and desktop, installs to your home screen and keeps your personal logs on your device.
+**DevWell 3.1.2 — Pulse** turns small healthy breaks into a practical daily routine. It works on mobile and desktop, installs to your home screen and keeps your personal logs on your device.
 
 ## Original Pulse design
 
@@ -24,6 +24,8 @@ Meal logging uses four in-app radio cards instead of the operating system’s se
 Short vibration feedback marks water, meal, movement, sleep and mood logs, routine completion, timer start/pause and break completion. Preferences includes a persistent **Vibration feedback** switch and **Test vibration** button. Vibration remains separate from visual motion settings.
 
 Haptics use the browser Vibration API, where available (typically Android Chromium browsers). iPhone/Safari and browsers without that API keep all visual feedback and tracking. The API cannot confirm a physical vibration motor: system settings, silent mode and browser policy can suppress vibration. Feedback requires interaction with the page and runs only while visible. Vibration is stopped when the app is hidden or the preference is disabled. An old timer still records completion, but does not vibrate on a later reload or return. This does not add closed-app or lock-screen vibration reminders.
+
+The vibration test uses two 150ms pulses, separated by 80ms, to make a device check noticeable without changing everyday feedback. A persistent status distinguishes browser acceptance, browser rejection, missing support, disabled feedback, hidden page, and missing activation. Acceptance confirms only the API request; it cannot confirm physical motor output. The “No vibration?” disclosure explains how to try directly in Chrome and check phone Silent/Do Not Disturb and vibration settings.
 
 ## What works
 

@@ -1,6 +1,6 @@
-const CACHE = 'devwell-shell-v3.1.1';
+const CACHE = 'devwell-shell-v3.1.2';
 const ROOT = new URL('./', self.location).pathname;
-const FILES = ['./','./index.html','./styles.css?v=3.1.1','./model.js?v=3.1.1','./app.js?v=3.1.1','./haptics.js?v=3.1.1','./views.js?v=3.1.1','./icons.js?v=3.1.1','./motion.js?v=3.1.1','./manifest.webmanifest','./assets/icon.svg','./assets/icon-192.png','./assets/icon-512.png','./pulse.js?v=3.1.1','./assets/art/pulse.webp','./assets/fonts/space-grotesk.ttf'];
+const FILES = ['./','./index.html','./styles.css?v=3.1.2','./model.js?v=3.1.2','./app.js?v=3.1.2','./haptics.js?v=3.1.2','./views.js?v=3.1.2','./icons.js?v=3.1.2','./motion.js?v=3.1.2','./manifest.webmanifest','./assets/icon.svg','./assets/icon-192.png','./assets/icon-512.png','./pulse.js?v=3.1.2','./assets/art/pulse.webp','./assets/fonts/space-grotesk.ttf'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES).then(()=>self.skipWaiting()))));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('devwell-shell-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',event=>{
