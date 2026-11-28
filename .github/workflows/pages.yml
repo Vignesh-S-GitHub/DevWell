@@ -91,14 +91,14 @@ jobs:
           node --input-type=module <<'NODE'
           const base=process.env.DEVWELL_URL;
           for(let attempt=0;attempt<12;attempt++){
-            const response=await fetch(base+'?release=3.5.0',{cache:'no-store'});
+            const response=await fetch(base+'?release=3.6.0',{cache:'no-store'});
             const html=await response.text();
-            if(response.ok&&html.includes('animations.js?v=3.5.0')&&html.includes('icons.js?v=3.5.0')){
-              for(const path of ['icons.js?v=3.5.0','animations.js?v=3.5.0','illustrations.js?v=3.5.0','haptics.js?v=3.5.0','timer.js?v=3.5.0','notifications.js?v=3.5.0','assets/icon.svg','assets/icon-192.png','assets/icon-512.png','assets/icons/preview.html']){
+            if(response.ok&&html.includes('animations.js?v=3.6.0')&&html.includes('icons.js?v=3.6.0')){
+              for(const path of ['icons.js?v=3.6.0','animations.js?v=3.6.0','illustrations.js?v=3.6.0','haptics.js?v=3.6.0','timer.js?v=3.6.0','notifications.js?v=3.6.0','assets/icon.svg','assets/icon-192.png','assets/icon-512.png','assets/icons/preview.html']){
                 const asset=await fetch(new URL(path,base));
                 if(!asset.ok)throw new Error('Missing published asset: '+path);
               }
-              console.log('Published Pulse 3.5.0 and original logo/icon assets verified.');process.exit(0);
+              console.log('Published Pulse 3.6.0 and original logo/icon assets verified.');process.exit(0);
             }
             await new Promise(resolve=>setTimeout(resolve,5000));
           }

@@ -1,6 +1,7 @@
-/* In-place animation only: progress, ink and confirmation. No parallax or page travel. */
+/* Animated artwork and progress. Page/card positions never animate on navigation. */
 (()=>{
  'use strict';
+ const epoch=performance.now();
  let cleanup=()=>{},values=new Map(),completed=new Set(),meals=new Set(),lastSignal='';
  const ease='cubic-bezier(.16,1,.3,1)';
  function init(){
@@ -29,8 +30,13 @@
    const key=signal+':'+row.dataset.mealEntry;nextMeals.add(key);
    if(!entered&&!meals.has(key))animate(row,[{opacity:.4},{opacity:1}],{duration:180});
   });meals=nextMeals;
+  // Restore a shared phase on render so logging and tab changes cannot snap artwork back.
+  if(!quiet)for(const animation of main.getAnimations({subtree:true})){
+   const timing=animation.effect?.getTiming(),duration=Number(timing?.duration);
+   if(timing?.iterations===Infinity&&Number.isFinite(duration)&&duration>0)animation.currentTime=(performance.now()-epoch)%duration;
+  }
   const loops=new IntersectionObserver(entries=>entries.forEach(entry=>entry.target.classList.toggle('animation-paused',!entry.isIntersecting)));
-  main.querySelectorAll('.page-art,.pulse-stage,.reset-art,.hydration-station,.reset-link,.live-label').forEach(el=>loops.observe(el));
+  main.querySelectorAll('.page-art,.pulse-stage,.reset-art,.hydration-station,.reset-link,.live-label,.routine-symbol').forEach(el=>loops.observe(el));
   const visibility=()=>{document.body.classList.toggle('animations-suspended',document.hidden);for(const animation of active){document.hidden?animation.pause():animation.play()}};
   document.addEventListener('visibilitychange',visibility);visibility();
   cleanup=()=>{loops.disconnect();for(const animation of active)animation.cancel();active.clear();document.removeEventListener('visibilitychange',visibility)};

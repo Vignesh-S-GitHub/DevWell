@@ -5,13 +5,13 @@
   <p>Everyday wellness for screen-heavy workdays.</p>
 </div>
 
-**DevWell 3.5.0 — Pulse** turns small healthy breaks into a practical daily routine. It works on mobile and desktop, installs to your home screen and keeps your personal logs on your device.
+**DevWell 3.6.0 — Pulse** turns small healthy breaks into a practical daily routine. It works on mobile and desktop, installs to your home screen and keeps your personal logs on your device.
 
 ## Original Pulse design
 
 An entirely new identity replaces the earlier sage/pastel UI: midnight surfaces, electric blue, lime actions, a new pulse symbol and self-hosted Space Grotesk. Every screen, form, menu and dialog uses this system, including the matching light appearance.
 
-The homepage keeps the original generated pearlescent loop fixed in place, framed by actual routine progress. Four fixed controls show real water, movement, meal and sleep data. There is no drifting sculpture, pointer parallax, spinning decoration or page-entry travel. Routine, Food, Move and Insights have original animated line instruments in the same palette. Their geometry stays fixed while linework draws and small accents softly change opacity. Animation respects the device and app preference, pauses offscreen and in hidden tabs, and is disposed when navigating away.
+The homepage’s original pearlescent loop turns slowly inside a steady composition, framed by actual routine progress. Four fixed controls show real water, movement, meal and sleep data. Tab changes never slide, stagger or wiggle headings and cards. Routine has repeating calendar linework and a next-activity beacon; Food has rippling water, rising bubbles and steam; Move has orbiting reset markers and animated activity icons; Insights has looping decorative instruments and actual chart-entry feedback. Animation phases survive logging without snapping to the start. All loops respect the device and app preference, pause offscreen and in hidden tabs, and are disposed when navigating away.
 
 ## Pulse 3.1 refinements
 
@@ -29,7 +29,7 @@ The vibration test uses two 150ms pulses, separated by 80ms, to make a device ch
 
 ## Guided resets
 
-All four Move activities share animated ring previews and an elapsed-time progress ring. Eye, stretch and walk timers keep their inner ring fixed and animate its light; their elapsed-time arcs remain live. Breathing uses the existing 4-second inhale / 6-second exhale cycle, with a two-tap inhale cue and one-tap exhale cue when vibration is enabled. Rings, text and haptics share the same timer clock. Pausing freezes progress, and resuming keeps the phase position. Hidden pages and disabled haptics stay quiet; returning synchronizes without replaying missed cues. Closing the timer panel keeps a running break and its foreground breathing cues active. Visual animation and vibration remain independent preferences.
+All four Move activities share animated ring previews and an elapsed-time progress ring. Eye, stretch and walk timers animate their inner ring using the same elapsed-time clock as the live progress arc. Breathing uses the existing 4-second inhale / 6-second exhale cycle, with a two-tap inhale cue and one-tap exhale cue when vibration is enabled. Rings, text and haptics share the same timer clock. Pausing freezes progress, and resuming keeps the phase position. Hidden pages and disabled haptics stay quiet; returning synchronizes without replaying missed cues. Closing the timer panel keeps a running break and its foreground breathing cues active. Visual animation and vibration remain independent preferences.
 
 ## Phone notifications
 

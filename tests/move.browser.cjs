@@ -16,11 +16,10 @@ const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=r
   const close=()=>p.getByRole('button',{name:'Close dialog'}).click();
   for(let index=0;index<3;index++){
    await p.locator('.reset-start').nth(index).click();await start();
-   const before=await p.locator('.activity-ring-field').evaluate(el=>el.style.opacity);
+   const before=await p.locator('.activity-ring-field').evaluate(el=>el.style.transform);
    await advance(1250);
    assert.ok(Number(await p.locator('#timerCircle').evaluate(el=>el.style.strokeDashoffset))<553,'Every activity has live elapsed progress');
-   assert.equal(await p.locator('.activity-ring-field').evaluate(el=>el.style.transform),'scale(1)','Non-breathing rings stay fixed');
-   assert.notEqual(await p.locator('.activity-ring-field').evaluate(el=>el.style.opacity),before,'Non-breathing rings animate light in place');
+   assert.notEqual(await p.locator('.activity-ring-field').evaluate(el=>el.style.transform),before,'Every activity has a clock-driven inner-ring animation');
    assert.equal(await p.locator('[data-reset-ring="'+index+'"]').getAttribute('class').then(c=>c.includes('is-active-reset')),true);
    assert.ok(Number(await p.locator('[data-reset-ring="'+index+'"] .reset-ring-fill').evaluate(el=>el.style.strokeDashoffset))<283);
    await p.getByRole('button',{name:'Pause',exact:true}).click();
