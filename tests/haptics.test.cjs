@@ -54,3 +54,9 @@ test('diagnostics distinguish every gating and browser outcome',()=>{
 test('explicit device test remains noticeable and can run immediately after enabling',()=>{
  const f=fixture();f.haptics.play('tap');assert.equal(f.haptics.play('test'),true);const pulse=f.calls.at(-1);assert.ok(Array.isArray(pulse));assert.equal(pulse.length,3);assert.ok(pulse[0]>=100&&pulse[2]>=100);assert.ok(pulse.reduce((a,b)=>a+b,0)<=500);f.haptics.dispose();
 });
+
+test('inhale and exhale cues are distinct and can announce a boundary after another tap',()=>{
+ const f=fixture();f.haptics.play('tap');assert.equal(f.haptics.play('breathIn'),true);
+ const inhale=f.calls.at(-1);assert.ok(Array.isArray(inhale));assert.equal(inhale.length,3);
+ assert.equal(f.haptics.play('breathOut'),true);assert.equal(typeof f.calls.at(-1),'number');f.haptics.dispose();
+});

@@ -1,7 +1,7 @@
 /* Optional, bounded haptic feedback. Never substitutes for visible feedback. */
 (function(root){
  'use strict';
- const patterns=Object.freeze({tap:12,log:18,success:Object.freeze([18,45,25]),complete:Object.freeze([45,60,75]),test:Object.freeze([150,80,150])});
+ const patterns=Object.freeze({tap:12,log:18,success:Object.freeze([18,45,25]),complete:Object.freeze([45,60,75]),test:Object.freeze([150,80,150]),breathIn:Object.freeze([35,50,35]),breathOut:75});
  function create({navigator:device,document:page,isEnabled,now=()=>Date.now()}){
   let last=-Infinity,until=0,result={accepted:false,reason:'idle'};
   const finish=(reason,accepted=false)=>{result={accepted,reason};return accepted};
@@ -18,7 +18,7 @@
    if(page.visibilityState!=='visible')return finish('hidden');
    if(device.userActivation?.hasBeenActive===false)return finish('activation-required');
    const time=now();
-   if(kind!=='complete'&&kind!=='test'&&time-last<120)return finish('throttled');
+   if(!['complete','test','breathIn','breathOut'].includes(kind)&&time-last<120)return finish('throttled');
    try{
     if(device.vibrate(Array.isArray(pattern)?[...pattern]:pattern)!==true)return finish('declined');
     last=time;until=time+(Array.isArray(pattern)?pattern.reduce((a,b)=>a+b,0):pattern);

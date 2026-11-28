@@ -5,7 +5,7 @@
   <p>Everyday wellness for screen-heavy workdays.</p>
 </div>
 
-**DevWell 3.1.2 — Pulse** turns small healthy breaks into a practical daily routine. It works on mobile and desktop, installs to your home screen and keeps your personal logs on your device.
+**DevWell 3.2.0 — Pulse** turns small healthy breaks into a practical daily routine. It works on mobile and desktop, installs to your home screen and keeps your personal logs on your device.
 
 ## Original Pulse design
 
@@ -26,6 +26,10 @@ Short vibration feedback marks water, meal, movement, sleep and mood logs, routi
 Haptics use the browser Vibration API, where available (typically Android Chromium browsers). iPhone/Safari and browsers without that API keep all visual feedback and tracking. The API cannot confirm a physical vibration motor: system settings, silent mode and browser policy can suppress vibration. Feedback requires interaction with the page and runs only while visible. Vibration is stopped when the app is hidden or the preference is disabled. An old timer still records completion, but does not vibrate on a later reload or return. This does not add closed-app or lock-screen vibration reminders.
 
 The vibration test uses two 150ms pulses, separated by 80ms, to make a device check noticeable without changing everyday feedback. A persistent status distinguishes browser acceptance, browser rejection, missing support, disabled feedback, hidden page, and missing activation. Acceptance confirms only the API request; it cannot confirm physical motor output. The “No vibration?” disclosure explains how to try directly in Chrome and check phone Silent/Do Not Disturb and vibration settings.
+
+## Guided resets
+
+All four Move activities share animated ring previews and an elapsed-time progress ring. The inner ring animates during eye, stretch and walk timers too. Breathing uses the existing 4-second inhale / 6-second exhale cycle, with a two-tap inhale cue and one-tap exhale cue when vibration is enabled. Rings, text and haptics share the same timer clock. Pausing freezes progress, and resuming keeps the phase position. Hidden pages and disabled haptics stay quiet; returning synchronizes without replaying missed cues. Closing the timer panel keeps a running break and its foreground breathing cues active. Motion and vibration remain independent preferences.
 
 ## What works
 
@@ -95,6 +99,7 @@ The browser test covers logs, escaping user content, reload persistence, edited 
 | `app.js` | Core actions, timers, backups and installation |
 | `views.js` | Pulse screens, forms and dialogs |
 | `icons.js` | Original 38-icon Orbit family and compatibility aliases |
+| `timer.js` | Shared countdown geometry and once-per-phase breathing cues |
 | `haptics.js` | Optional, bounded vibration with visibility and activation guards |
 | `motion.js` | Shared page reveals, progress feedback and visibility-aware motion |
 | `assets/icons/` | Standalone SVGs, sprite and dark/light gallery |

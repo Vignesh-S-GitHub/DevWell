@@ -96,3 +96,8 @@ Shared motion uses 280–550ms feedback and short staggered section entrances. C
 ## Mobile haptics
 
 Meaningful feedback only: a 12ms tap for timer start/pause, 18ms for logged activities, an 18/45/25ms double pulse for routine completion, and a 45/60/75ms completion signal for a just-finished reset. Numbers alternate vibration and silence. Navigation, scrolling, removing entries and repeated timer ticks are quiet. Rapid feedback is throttled; completion can override a smaller tap. Unsupported hardware and denied vibration never block actions. The persistent preference and test action use the same themed controls. Hidden documents and past timer completions do not trigger delayed haptics. Reduced visual motion remains a separate preference.
+
+
+## Guided ring resets
+
+All Move cards use circular ring previews with quiet orbital motion. A running card shows real elapsed progress. Every timer uses a shared progress arc and animated inner ring. Breathing expansion follows four seconds in and six seconds out, computed from the target timestamp rather than a separate CSS loop. Two short taps announce inhale; one pulse announces exhale. The same timing state drives visual cues and haptics, survives pause/resume, and deduplicates cue notifications. Hidden-page and disabled-vibration periods suppress cues without replaying missed phases on return. Reduced motion freezes decorative scaling but keeps text and progress readable.
